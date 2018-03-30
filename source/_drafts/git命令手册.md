@@ -27,3 +27,36 @@ $ git push origin branch_name
 ```shell
 $ git commit --amend -m "New commit message"
 ```
+
+# 分支管理
+## 新建分支
+```shell
+$ git checkout -b <branch_name>
+```
+## 切换分支
+```shell
+$ git checkout <branch_name>
+```
+## 查看分支列表
+1. 查看本地分支列表
+```shell
+$ git branch
+```
+2. 查看远程分支列表
+```shell
+$ git branch -r
+```
+3. 查看本地和远程分支
+```shell
+$ git branch -a
+```
+# 删除分支
+```shell
+$ git branch -D <branch_name>
+```
+# 合并分支
+```shell
+$ git merge <other_branch>
+# 
+```
+
