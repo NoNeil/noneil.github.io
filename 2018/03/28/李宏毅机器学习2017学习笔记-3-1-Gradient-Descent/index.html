@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="LeetCode," />
+  <meta name="keywords" content="Machine Learning,李宏毅,梯度下降," />
 
 
 
@@ -123,18 +123,32 @@
 
 
 
-<meta name="description" content="LeetCode: 632.Smallest Range 问题描述You have k lists of sorted integers in ascending order. Find the smallest range that includes at least one number from each of the k lists. We define the range [a,b] i">
-<meta name="keywords" content="LeetCode">
+<meta name="description" content="梯度下降法的3个小技巧，梯度下降法的由来，梯度下降法的局限性。">
+<meta name="keywords" content="Machine Learning,李宏毅,梯度下降">
 <meta property="og:type" content="article">
-<meta property="og:title" content="632.Smallest Range">
-<meta property="og:url" content="http://yoursite.com/2018/03/15/632-Smallest-Range/index.html">
+<meta property="og:title" content="李宏毅机器学习2017学习笔记:3-1.Gradient Descent">
+<meta property="og:url" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/index.html">
 <meta property="og:site_name" content="Neil&#39;s Blog">
-<meta property="og:description" content="LeetCode: 632.Smallest Range 问题描述You have k lists of sorted integers in ascending order. Find the smallest range that includes at least one number from each of the k lists. We define the range [a,b] i">
+<meta property="og:description" content="梯度下降法的3个小技巧，梯度下降法的由来，梯度下降法的局限性。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T15:13:08.944Z">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/gradient_descent.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/learning_rate.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/adagrad_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/adagrad_2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/adagrad_3.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/stochastic_gradient.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/feature_scaling.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/formal_derivation.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/theory_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/theory_2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/theory_3.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/theory_4.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/limitation.jpg">
+<meta property="og:updated_time" content="2018-03-28T15:24:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="632.Smallest Range">
-<meta name="twitter:description" content="LeetCode: 632.Smallest Range 问题描述You have k lists of sorted integers in ascending order. Find the smallest range that includes at least one number from each of the k lists. We define the range [a,b] i">
+<meta name="twitter:title" content="李宏毅机器学习2017学习笔记:3-1.Gradient Descent">
+<meta name="twitter:description" content="梯度下降法的3个小技巧，梯度下降法的由来，梯度下降法的局限性。">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/gradient_descent.jpg">
 
 
 
@@ -164,13 +178,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/15/632-Smallest-Range/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/"/>
 
 
 
 
 
-  <title>632.Smallest Range | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>李宏毅机器学习2017学习笔记:3-1.Gradient Descent | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -331,7 +345,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/15/632-Smallest-Range/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Neil Xu">
@@ -348,7 +362,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">632.Smallest Range</h1>
+          <h1 class="post-title" itemprop="name headline">李宏毅机器学习2017学习笔记:3-1.Gradient Descent</h1>
         
 
         <div class="post-meta">
@@ -360,8 +374,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T17:56:02+08:00">
-                2018-03-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T23:24:46+08:00">
+                2018-03-28
               </time>
             
 
@@ -383,8 +397,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -401,9 +415,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/15/632-Smallest-Range/#comments" itemprop="discussionUrl">
+                <a href="/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/15/632-Smallest-Range/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -416,6 +430,10 @@
 
           
 
+          
+              <div class="post-description">
+                  梯度下降法的3个小技巧，梯度下降法的由来，梯度下降法的局限性。
+              </div>
           
 
         </div>
@@ -431,29 +449,84 @@
       
 
       
-        <p><a href="https://leetcode.com/problems/smallest-range/" target="_blank" rel="noopener">LeetCode: 632.Smallest Range</a></p>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>You have <code>k</code> lists of sorted integers in ascending order. Find the <strong>smallest</strong> range that includes at least one number from each of the <code>k</code> lists.</p>
-<p>We define the range <code>[a,b]</code> is smaller than range <code>[c,d]</code> if <code>b-a &lt; d-c</code> or <code>a &lt; c</code> if <code>b-a == d-c</code>.</p>
-<p><strong>Example 1:</strong></p>
-<blockquote>
-<p>Input:[[4,10,15,24,26], [0,9,12,20], [5,18,22,30]]<br>Output: [20,24]<br>Explanation:<br>List 1: [4, 10, 15, 24,26], 24 is in range [20,24].<br>List 2: [0, 9, 12, 20], 20 is in range [20,24].<br>List 3: [5, 18, 22, 30], 22 is in range [20,24].</p>
-</blockquote>
-<p><strong>Note:</strong></p>
+        <p>对于以下优化问题，我们需要找到最优的参数$\theta ^ \ast$，使得损失函数最小：<br>$$ \theta ^ \ast = arg \min_{\theta} L(\theta) $$</p>
+<p>使用梯度下降的方法进行优化。</p>
+<p>梯度是损失函数的等高线的法线方向，每次更新参数时，往梯度方向的反方向走。<br>$$ \theta^{t+1} = \theta^t - \eta * \nabla L(\theta^t)$$<br><img src="gradient_descent.jpg" width="500px"></p>
+<h1 id="梯度下降的几个小技巧"><a href="#梯度下降的几个小技巧" class="headerlink" title="梯度下降的几个小技巧"></a>梯度下降的几个小技巧</h1><h2 id="调整learning-rate"><a href="#调整learning-rate" class="headerlink" title="调整learning rate"></a>调整learning rate</h2><p>将Loss的变化趋势可视化出来。</p>
+<ul>
+<li>如果learning rate比较小，那么Loss降低得很慢；</li>
+<li>如果learning rate比较大，那么Loss会出现在极小值附近震荡的现象；</li>
+<li>如果learning rate太大，那么Loss会剧烈变化，飞出去了；<br><img src="learning_rate.jpg" width="500px"></li>
+</ul>
+<p>自动调整learning rate</p>
 <ol>
-<li>The given list may contain duplicates, so ascending order means &gt;= here.</li>
-<li>1 &lt;= k &lt;= 3500</li>
-<li>-105 &lt;= value of elements &lt;= 105.</li>
-<li>For Java users, please note that the input type has been changed to List&lt;List<integer>&gt;. And after you reset the code template, you’ll see this point.</integer></li>
+<li>流行且简单的方法是，逐渐减小learning rate</li>
 </ol>
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给定k个数组，找出一个最小的<strong>区间</strong>，使得区间内包含每个数字内至少一个数。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>用一个优先队列，里面存k个分别来自k个数组的数。</p>
-<p>每次从队列里弹出一个最小值，并从弹出值的数组里，添加下一个值。</p>
-<p>每次弹出时，计算但是的range，如果比之前的小，就替换掉之前的range，作为一个新结果。</p>
+<ul>
+<li>刚开始的时候，离最优解比较远，采用比较大的learning rate</li>
+<li>随着迭代次数增加，离最优解越来越紧，我们慢慢减小learning rate</li>
+<li>例如：$ \eta^t = \eta / {\sqrt{t+1}}$</li>
+</ul>
+<ol start="2">
+<li>每个不同的参数，采用不同的learning rate</li>
+</ol>
+<p><strong>Adagrad</strong><br>每个参数的learning rate都除上<strong>过去所有微分值的均方根（root mean square of its previous derivatives）</strong></p>
+<p>普通的Gradient Descent：（对于每个参数）<br>$$ w^{t+1} = w^t - \eta^t g^t $$<br>Adagrad:（对于每个参数）<br>$$ w^{t+1} = w^t - \frac {\eta^t} {\delta^t} g^t $$<br>其中:</p>
+<ul>
+<li>$ \eta^t = \frac \eta {\sqrt{t+1}} $</li>
+<li>$ g^t = \frac {\partial L(\theta ^ t)} {\partial w} $</li>
+<li>${\delta^t}$是<strong>过去所有微分值的均方根</strong>。<br><img src="adagrad_1.jpg" width="500px"></li>
+</ul>
+<p>消掉$ {\sqrt{t+1}} $之后：<br>$$ w^{t+1} = w^t - \frac \eta {\sqrt{\sum_{i=0}^t (g^i)^2}} g^t $$<br>再比较一下普通的梯度下降与Adagrad：<br>普通的Gradient Descent（对于每个参数）：<br>$$ w^{t+1} = w^t - \eta^t g^t<br> = w^t - \eta \frac {g^t} {\sqrt{t+1}}<br>$$<br>learning rate随着t的增大而减小，$g$越大时，参数变化得越大。</p>
+<p>Adagrad（对于每个参数）：<br>$$<br>w^{t+1} = w^t - \frac \eta {\sqrt{\sum_{i=0}^t (g^i)^2}} g^t<br>= w^t - \eta \frac {g^t} {\sqrt{\sum_{i=0}^t (g^i)^2}}<br>$$<br>learning rate与过去所有的微分有关，$g$越大时，如果过去所有的$g$也很大，那么参数变化得不大；如果过去所有的$g$很小，那么参数变化得就很大。<br><!--Adabrad的$\sqrt{\sum_{i=0}^t (g^i)^2}$能使$g$很大的时候，保证步长不至于太大。--><br><img src="adagrad_2.jpg" width="500px"></p>
+<p>Adagrad每次更新参数时，不仅考虑了当前的梯度$g^t$，而且还考虑了过去所有的$g$，即$\sqrt{\sum_{i=0}^t (g^i)^2}$。</p>
+<p>这个$\sqrt{\sum_{i=0}^t (g^i)^2}$ 能造成<strong>反差</strong>的效果。<br>如下图：<br><img src="adagrad_3.jpg" width="500px"></p>
+<p>TODO：添加解释<br>用<strong>过去所有微分值的均方根</strong>来替代二次微分。</p>
+<h2 id="随机梯度下降-Stochastic"><a href="#随机梯度下降-Stochastic" class="headerlink" title="随机梯度下降(Stochastic)"></a>随机梯度下降(Stochastic)</h2><ol>
+<li>普通的梯度下降（所有的样本）：</li>
+</ol>
+<ul>
+<li>损失函数：$ L = \sum_{i=1}^n \left( \hat y^i - w*x \right)^2$</li>
+<li>参数更新：$ \theta^{t+1} = \theta^t - \eta \nabla L(\theta^t) $</li>
+<li>看完了所有的样本，才更新参数。</li>
+</ul>
+<ol start="2">
+<li>随机梯度下降（选择一个样本）：</li>
+</ol>
+<ul>
+<li>损失函数：$ L^i = \left( \hat y^i - w*x \right)^2$</li>
+<li>参数更新：$ \theta^{t+1} = \theta^t - \eta \nabla L^i(\theta^t) $</li>
+<li>没看完一个样本，都更新一次参数。虽然每次用一个样本更新参数的效果不如普通的梯度下降，但是所有样本更新完之后，效果就比普通的梯度下降方法更好了。</li>
+</ul>
+<p><img src="stochastic_gradient.jpg" width="500px"></p>
+<h2 id="特征归一化-Feature-Scaling"><a href="#特征归一化-Feature-Scaling" class="headerlink" title="特征归一化(Feature Scaling)"></a>特征归一化(Feature Scaling)</h2><p>把特征的各个维度进行归一化，使各个特征的取值范围一致。<br>具体做法：</p>
+<ul>
+<li>取第<code>i</code>维特征$x_i$；</li>
+<li>求均值$m_i$、标准差$\delta_i$；</li>
+<li>对第<code>r</code>样本，更新数值$ x_i^r = \frac {x_i^r - m_i} \delta_i $</li>
+</ul>
+<p><img src="feature_scaling.jpg" width="500px"></p>
+<h1 id="梯度下降的理论基础"><a href="#梯度下降的理论基础" class="headerlink" title="梯度下降的理论基础"></a>梯度下降的理论基础</h1><h2 id="Formal-Derivation（形式误差）"><a href="#Formal-Derivation（形式误差）" class="headerlink" title="Formal Derivation（形式误差）"></a>Formal Derivation（形式误差）</h2><p>给定一个起始点 $\theta^0$，我可以在其一定范围内找到一个最小的点，并更新为 $\theta^1$。如此迭代下去，知道找到最优解。<br><img src="formal_derivation.jpg" width="500px"></p>
+<h2 id="Taylor-Series（泰勒级数）"><a href="#Taylor-Series（泰勒级数）" class="headerlink" title="Taylor Series（泰勒级数）"></a>Taylor Series（泰勒级数）</h2><p><strong>定理：</strong><br>如果 $h(x)$ 在 $x_0$ 附近是无限可微的，那么 $h(x)$ 可以展开成：<br>$$<br>h(x) = \sum_{k=0}^\infty \frac {h^k({x_0})} {k!} (x-{x_0})^k<br>= h(x_0) + h’(x_0)(x-x_0) + \frac {h’’(x_0)} {2!} (x-x_0)^2 + …<br>$$<br>当 $x$ 很接近 $x_0$ 时，$ h(x) \approx h(x_0) + h’(x_0)(x-x_0) $</p>
+<p>多个参数的泰勒展开：<br>$$<br>h(x,y) = h(x_0,y_0) + \frac {\partial h(x_0,y_0)} {\partial x} (x - x_0) + \frac {\partial h(x_0,y_0)} {\partial y} (y - y_0) + …<br>$$<br>当 $(x,y)$ 很接近 $(x_0,y_0)$ 时，$ h(x,y) \approx h(x_0,y_0) + \frac {\partial h(x_0,y_0)} {\partial x} (x - x_0) + \frac {\partial h(x_0,y_0)} {\partial y} (y - y_0) $</p>
+<h2 id="梯度下降法的由来"><a href="#梯度下降法的由来" class="headerlink" title="梯度下降法的由来"></a>梯度下降法的由来</h2><p>如图，假设红色圆圈(半径<code>d</code>)很小很小，那么损失函数在红色圆圈内满足：<br>$L(\theta) \approx s + u(\theta_1 - a) + v(\theta_2 - b)$<br><img src="theory_1.jpg" width="500px"></p>
+<p>问题转换为：在红色圆圈内，求损失函数的最小值。<br><img src="theory_2.jpg" width="500px"></p>
+<p>如下图，损失函数的各个部分中，$s, u, v$是固定的，我们要求的是 $\Delta \theta_1$ 和 $\Delta \theta_2$ .<br>从图中，很容易看出，当 $(\Delta \theta_1$ , $\Delta \theta_2)$ 与 $(u, v)$的方向正好<strong>相反</strong>时，$L(\theta)$最小。<br><img src="theory_3.jpg" width="500px"></p>
+<p>也就是说 $\theta^{t-1} - \theta^t$ 的结果是 $(u, v)$ 的反方向。<br>如下图，转换一下之后，就得到了梯度下降的公式。<br><img src="theory_4.jpg" width="500px"></p>
+<p><strong>Note</strong>：如果把泰勒级数的二次微分考虑进来的话，就是牛顿法了。</p>
+<h1 id="梯度下降法的局限性"><a href="#梯度下降法的局限性" class="headerlink" title="梯度下降法的局限性"></a>梯度下降法的局限性</h1><p>容易卡在局部最小值点和鞍点，他们的共同点都是微分值为0的点。<br>计算过程中，当微分值特别小的时候，我们可能会认为这是到了局部最小值，就提前结束循环。<br>实际上，我们可能只是遇到了鞍点。<br><img src="limitation.jpg" width="500px"></p>
+<p>总结：</p>
 <ol>
-<li>队列，能满足区间里同时来自k个数组的k个数；</li>
-<li>最小区间，通过这个来满足：每次往里队列里添加的都是同budga下一个数（也就是紧接着最小的数），如果当期range小于上一个range就替换之。</li>
+<li>梯度下降法的三个tip：<ul>
+<li>使用Adagrad动态调整learning rate</li>
+<li>随机梯度下降</li>
+<li>特征归一化</li>
+</ul>
+</li>
+<li>通过泰勒级数推出梯度下降的方法。</li>
+<li>梯度下降法的局限性：容易卡在局部最小值点和鞍点。</li>
 </ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] smallestRange(List&lt;List&lt;Integer&gt;&gt; nums) &#123;</span><br><span class="line">        PriorityQueue&lt;Element&gt; priorityQueue = <span class="keyword">new</span> PriorityQueue&lt;Element&gt;(<span class="keyword">new</span> Comparator&lt;Element&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Element o1, Element o2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> o1.value - o2.value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">int</span> maxValue = Integer.MIN_VALUE;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            Element element = <span class="keyword">new</span> Element(nums.get(i).get(<span class="number">0</span>), <span class="number">0</span>, i);</span><br><span class="line">            priorityQueue.offer(element);</span><br><span class="line">            maxValue = Math.max(maxValue, nums.get(i).get(<span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> range = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">int</span> start = -<span class="number">1</span>, end = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(priorityQueue.size() == nums.size())&#123;</span><br><span class="line">            Element popElement = priorityQueue.poll();</span><br><span class="line">            <span class="keyword">if</span> (maxValue - popElement.value &lt; range) &#123;</span><br><span class="line">                start = popElement.value;</span><br><span class="line">                end = maxValue;</span><br><span class="line">                range = maxValue - popElement.value;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> index = popElement.index + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (index &lt; nums.get(popElement.budge).size())&#123;</span><br><span class="line">                Element element = <span class="keyword">new</span> Element(nums.get(popElement.budge).get(index), index, popElement.budge);</span><br><span class="line">                priorityQueue.offer(element);</span><br><span class="line">                maxValue = Math.max(maxValue, element.value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;start, end&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Element</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> value;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> index;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> budge;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Element</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> i, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = v;</span><br><span class="line">        <span class="keyword">this</span>.index = i;</span><br><span class="line">        <span class="keyword">this</span>.budge = b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -470,7 +543,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/李宏毅/" rel="tag"># 李宏毅</a>
+          
+            <a href="/tags/梯度下降/" rel="tag"># 梯度下降</a>
           
         </div>
       
@@ -483,15 +560,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/03/26/李宏毅机器学习2017学习笔记-2-Bias-and-Variance/" rel="next" title="李宏毅机器学习2017学习笔记:2.Bias and Variance">
+                <i class="fa fa-chevron-left"></i> 李宏毅机器学习2017学习笔记:2.Bias and Variance
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/15/553-Optimal-Division/" rel="prev" title="553. Optimal Division">
-                553. Optimal Division <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -649,7 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题意"><span class="nav-number">2.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降的几个小技巧"><span class="nav-number">1.</span> <span class="nav-text">梯度下降的几个小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#调整learning-rate"><span class="nav-number">1.1.</span> <span class="nav-text">调整learning rate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机梯度下降-Stochastic"><span class="nav-number">1.2.</span> <span class="nav-text">随机梯度下降(Stochastic)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征归一化-Feature-Scaling"><span class="nav-number">1.3.</span> <span class="nav-text">特征归一化(Feature Scaling)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降的理论基础"><span class="nav-number">2.</span> <span class="nav-text">梯度下降的理论基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Formal-Derivation（形式误差）"><span class="nav-number">2.1.</span> <span class="nav-text">Formal Derivation（形式误差）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Taylor-Series（泰勒级数）"><span class="nav-number">2.2.</span> <span class="nav-text">Taylor Series（泰勒级数）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度下降法的由来"><span class="nav-number">2.3.</span> <span class="nav-text">梯度下降法的由来</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降法的局限性"><span class="nav-number">3.</span> <span class="nav-text">梯度下降法的局限性</span></a></li></ol></div>
             
 
           </div>
@@ -819,9 +896,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/03/15/632-Smallest-Range/';
-          this.page.identifier = '2018/03/15/632-Smallest-Range/';
-          this.page.title = '632.Smallest Range';
+          this.page.url = 'http://yoursite.com/2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/';
+          this.page.identifier = '2018/03/28/李宏毅机器学习2017学习笔记-3-1-Gradient-Descent/';
+          this.page.title = '李宏毅机器学习2017学习笔记:3-1.Gradient Descent';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://neilxu.disqus.com/embed.js';
