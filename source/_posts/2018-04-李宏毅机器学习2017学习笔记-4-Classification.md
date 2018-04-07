@@ -1,6 +1,6 @@
 ---
 title: 李宏毅机器学习2017学习笔记-4.Classification
-description: 生成模型、贝叶斯分类器、推导出Logistics Regression模型
+description: 首先介绍什么是生成模型，然后用一个典型的例子：概率高斯模型（多元高斯模型）进行详细的阐述。然后简单介绍一下朴素贝叶斯模型。最后，如果用sigmoid函数($\delta(z)$)表示后验概率的话，`z`与`x`成线性关系。
 categories: Machine Learning
 tags:
   - 李宏毅
@@ -121,4 +121,4 @@ $\Sigma^\ast = \frac 1 {79} \sum_{n=1}^{79} (x^n - \mu\ast)(x^n - \mu^\ast)^T $
 1. 通过一个从两个盒子中取篮球和绿球的例子，引出生成模型。
 2. 生成模型能求出$P(x)$，求$P(x)$依赖于求解各个类的$P(C_i)和$P(x|C_i)$。
 3. 朴素贝叶斯分类器的假设是，`x`的特征的各个维度是不相关的。
-4. 后验概率能表示为一个sigmoid函数：$P(C_i|x)=\delta(z)$，在数据服从高斯分布的前提假设下，这个`z`又与`x`线性相关。所以，$P(C_i|x) = \delta(w \cdot x + b)$
+4. 后验概率能表示为一个sigmoid函数：$P(C_i|x)=\delta(z)$，在数据服从高斯分布的前提假设下，这个`z`又与`x`线性相关。所以，$P(C_i|x) = \delta(w \cdot x + b)$.(LR并没有假设数据服从高斯分布)
