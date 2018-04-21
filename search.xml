@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习2017学习笔记:8.Backpropagation]]></title>
+    <url>%2F2018%2F04%2F21%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A02017%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-8-Backpropagation%2F</url>
+    <content type="text"><![CDATA[链式求导法则Case 2: 当改变s时，会通过函数g(s)和h(s)改变x和y，进而通过k(x,y)改变z。 反向传播（Backpropagation）假设损失函数为$L(\theta)$： 计算参数w的偏导：$\partial z / \partial w$，称之为向前传播。 计算激活值z的偏导：$\partial C / \partial z$，称之为向后传播。 向前传播$z = w*x$，因此$\partial z / \partial w = x$ 向后传播假设： 激活函数是sigmoid函数； 只有一个隐含层； 每一层只有2个神经元。 那么： $\partial a / \partial z$，也就是对激活函数求偏导； $\partial z / \partial a = w$，这个很直观； 要求左边的$\partial C / \partial z$，必须先求右边的$\partial C / \partial z’$和$\partial C / \partial z’’$。因此，可以从右往左，依次求解$\partial C / \partial z$。 整理一下，可以得到：其中，$\sigma’(z)=\sigma(z)(1-\sigma(z))$可以轻松求解。 可以把『反向传播』想象成另一个神经元： 输入是：后面的$\partial C / \partial z$ 激活函数是：乘上一个已知的数$\delta’(z)$，类似『放大器』的功能 如果是最后一层:直接求解$\partial C / \partial z$ 如果不是最后一层:依次递归求解，直到最后一层。『向后传播』时，类似一个反向的神经网络。从右往左计算，计算量跟『向前传播』的计算量一样。 小结 在向前传播中，我们求得了$\partial z / \partial w$ 在向后传播中，我们求得了$\partial C / \partial z$ 将上述两者相乘，就得到了参数的微分：$\partial C / \partial w$ 总结 链式求导法则 向前传播求解$\partial z / \partial w$，向后传播求解$\partial C / \partial z$，两者相乘就是参数w的微分 向后传播可以看做一个反向的神经网络，能从右向左依次求出$\partial C / \partial z$]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>李宏毅</tag>
+        <tag>BP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习2017学习笔记:7.Brief Introduction of Deep Learning]]></title>
     <url>%2F2018%2F04%2F21%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A02017%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-7-Brief-Introduction-of-Deep-Learning%2F</url>
     <content type="text"><![CDATA[深度学习的发展史 深度学习方法Deep Learning 的三个步骤跟机器学习的三个步骤一样： 定义一个模型 评价模型的好坏（损失函数） 求解模型的最优参数备注：function set是指一个模型；一个function是指参数已经确定的模型，给定一个输入，就会有个输出。 定义一个模型最简单的深度学习模型就是『全连接前馈网络』，由一个输入层、多个隐含层、一个输出层组成。 各种DL模型的层数对比： 2012，AlexNet，8层，16.4%的错误率； 2014，VGG，19层，7.3%的错误率； 2014，GoogleNet，6.7%的错误率； 2015，Residual Net，3.57%的错误率。 我们可以把中间隐含层部分看作一个特征提取的模块。最后一个输出层用Softmax。 举个例子：手写数字识别需要设计每层的神经元的个数。 FAQ： Q:选择多少层？每层多少个神经元？A: 根据训练处的误差，凭直觉进行调整 Q:网络结构能自动设置吗？A: 能，例如：Evolutionary Artificial Neural Network Q: 能否设计其他的网络结构？A: 能，例如：CNN 评价模型的好坏（损失函数）『手写字符识别』的例子中，用Cross Entropy作损失函数。 求解模型的最优参数使用Gradient Descent求解最优的参数。 有很多深度学习框架来帮你计算微分：TensorFlow、torch、theano、Caffe、Microsoft CNTK、chainer、DSSTNE、mxnet、libdnn 为什么要用深度学习？ 有些实验表明，网络越深，效果越好。 理论证明，一个隐含层的网络能表示任意函数。理论上，不一定要『深』，也可以『宽』。 总结： 介绍了深度学习的发展史 深度学习的3个步骤，与机器学习的三个步骤一样。以全连接的前馈神经网络为例阐述着三个步骤：建模（定义网络结构）、定义损失函数、求解最优参数。]]></content>
@@ -127,8 +140,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>git</tag>
         <tag>Hexo</tag>
+        <tag>git</tag>
         <tag>github</tag>
       </tags>
   </entry>
