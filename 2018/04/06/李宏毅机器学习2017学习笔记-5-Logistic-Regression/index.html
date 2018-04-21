@@ -133,6 +133,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/04/06/李宏毅机器学习2017学习笔记-5-Logistic-Regression/logistic%20vs%20linear%20regression.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/04/06/李宏毅机器学习2017学习笔记-5-Logistic-Regression/cross_entropy.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/06/李宏毅机器学习2017学习笔记-5-Logistic-Regression/sigmoid.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/04/06/李宏毅机器学习2017学习笔记-5-Logistic-Regression/partial_w.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/04/06/李宏毅机器学习2017学习笔记-5-Logistic-Regression/LR+SE.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/04/06/李宏毅机器学习2017学习笔记-5-Logistic-Regression/LR+SE_2.jpg">
@@ -472,6 +473,9 @@
 <li>如果$\hat y^i = 0$，且$f(x^i) = 0$，那么$H(p,q)=0$.<br><img src="cross_entropy.jpg" width="500px"></li>
 </ul>
 <h2 id="Logistic-回归的优化方法"><a href="#Logistic-回归的优化方法" class="headerlink" title="Logistic 回归的优化方法"></a>Logistic 回归的优化方法</h2><p>记住，$\sigma(z)$对$z$的导数为：<br>$$ \frac {\partial \sigma(z)} {\partial z} = \sigma(z) (1-\sigma(z))$$</p>
+<blockquote>
+<p>备注：怎么记sigmoid函数的偏导？<br>如下图，sigmoid函数的陡峭程度从左往右先逐渐增加，到<code>x=0</code>的位置最大，然后逐渐减小。所以sigmoid函数的导数是个开口朝下的函数，并且左右对称。<br>当$\delta(z)=0.5$时，sigmoid函数的导数取最大值，也就是说sigmoid函数的导数以<code>x=0.5</code>的坐标轴左右对称。<br>基于以上分析，sigmoid的导数是$\sigma(z) (1-\sigma(z))$的形式。<br><img src="sigmoid.jpg" width="300px"></p>
+</blockquote>
 <p>那么，$ln \sigma(z)$对$z$的导数为：<br>$$ \frac {\partial ln\sigma(z)} {\partial z} = \frac 1 {\sigma(z)} \sigma(z) (1-\sigma(z)) = (1-\sigma(z))$$</p>
 <p>那么，$1 - ln \sigma(z)$对$z$的导数为：<br>$$ \frac {\partial (1-ln\sigma(z))} {\partial z} = - \frac 1 {1 - \sigma(z)} \sigma(z) (1-\sigma(z)) = -\sigma(z)$$</p>
 <p>其中，$z=wx+b$，所以$z$对$w$的偏导为$x$：$ \frac {\partial z} {\partial w} = x$</p>
@@ -688,7 +692,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
