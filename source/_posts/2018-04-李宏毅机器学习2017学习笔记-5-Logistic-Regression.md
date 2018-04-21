@@ -41,6 +41,11 @@ Logistic 回归的损失函数是两个伯努利的**交叉熵**。
 ## Logistic 回归的优化方法
 记住，$\sigma(z)$对$z$的导数为：
 $$ \frac {\partial \sigma(z)} {\partial z} = \sigma(z) (1-\sigma(z))$$
+> 备注：怎么记sigmoid函数的偏导？
+> 如下图，sigmoid函数的陡峭程度从左往右先逐渐增加，到`x=0`的位置最大，然后逐渐减小。所以sigmoid函数的导数是个开口朝下的函数，并且左右对称。
+> 当$\delta(z)=0.5$时，sigmoid函数的导数取最大值，也就是说sigmoid函数的导数以`x=0.5`的坐标轴左右对称。
+> 基于以上分析，sigmoid的导数是$\sigma(z) (1-\sigma(z))$的形式。
+> <img src="sigmoid.jpg" width="300px">
 
 那么，$ln \sigma(z)$对$z$的导数为：
 $$ \frac {\partial ln\sigma(z)} {\partial z} = \frac 1 {\sigma(z)} \sigma(z) (1-\sigma(z)) = (1-\sigma(z))$$
