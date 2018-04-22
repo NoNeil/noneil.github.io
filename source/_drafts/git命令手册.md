@@ -64,3 +64,12 @@ $ git merge <other_branch>
 # 
 ```
 
+# tips
+
+## 解决每次都输入passphrase
+参考：[stackoverflow](https://stackoverflow.com/questions/10032461/git-keeps-asking-me-for-my-ssh-key-passphrase)
+编辑文件：`~/.ssh/config`，允许`UseKeychain`
+```shell
+Host *
+    UseKeychain yes
+```
