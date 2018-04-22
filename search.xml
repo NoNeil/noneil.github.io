@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Keras安装（macOS 10.13.4）]]></title>
+    <url>%2F2018%2F04%2F22%2FKeras%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[安装Miniconda在清华镜像站下载Miniconda安装包，地址：https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/ 我下载的最新版：Miniconda3-latest-MacOSX-x86_64.sh123$ cd ~/Download$ chmod +x Miniconda3-latest-MacOSX-x86_64.sh$ ./Miniconda3-latest-MacOSX-x86_64.sh 根据提示进行安装即可，该脚本会自动将~/Miniconda3/bin目录添加到环境变量中。123456$ cat ~/.bash_profile# added by Miniconda3 installerexport PATH="/Users/Neil/miniconda3/bin:$PATH"# 使环境变量生效$ source ~/.bash_profile 安装keras1$ pip install keras keras默认的深度学习包是TensorFlow，如果要修改成Theano，编辑~/.keras/keras.json1234567$ cat ~/.keras/keras.json&#123; "image_data_format": "channels_last", "floatx": "float32", "epsilon": 1e-07, "backend": "tensorflow"&#125;% 安装TensorFlow1$ pip install tensorflow 验证是否安装成功123456789101112➜ bin pythonPython 3.6.4 |Anaconda, Inc.| (default, Jan 16 2018, 12:04:33)[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwinType "help", "copyright", "credits" or "license" for more information.&gt;&gt;&gt; import kerasUsing TensorFlow backend.&gt;&gt;&gt; print (keras.__version__)2.1.5&gt;&gt;&gt; import tensorflow as tf&gt;&gt;&gt; print (tf.__version__)1.7.0&gt;&gt;&gt;]]></content>
+      <categories>
+        <category>Keras</category>
+      </categories>
+      <tags>
+        <tag>Miniconda</tag>
+        <tag>Keras</tag>
+        <tag>TensorFlow</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习2017学习笔记:8.Backpropagation]]></title>
     <url>%2F2018%2F04%2F21%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A02017%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-8-Backpropagation%2F</url>
     <content type="text"><![CDATA[链式求导法则Case 2: 当改变s时，会通过函数g(s)和h(s)改变x和y，进而通过k(x,y)改变z。 反向传播（Backpropagation）假设损失函数为$L(\theta)$： 计算参数w的偏导：$\partial z / \partial w$，称之为向前传播。 计算激活值z的偏导：$\partial C / \partial z$，称之为向后传播。 向前传播$z = w*x$，因此$\partial z / \partial w = x$ 向后传播假设： 激活函数是sigmoid函数； 只有一个隐含层； 每一层只有2个神经元。 那么： $\partial a / \partial z$，也就是对激活函数求偏导； $\partial z / \partial a = w$，这个很直观； 要求左边的$\partial C / \partial z$，必须先求右边的$\partial C / \partial z’$和$\partial C / \partial z’’$。因此，可以从右往左，依次求解$\partial C / \partial z$。 整理一下，可以得到：其中，$\sigma’(z)=\sigma(z)(1-\sigma(z))$可以轻松求解。 可以把『反向传播』想象成另一个神经元： 输入是：后面的$\partial C / \partial z$ 激活函数是：乘上一个已知的数$\delta’(z)$，类似『放大器』的功能 如果是最后一层:直接求解$\partial C / \partial z$ 如果不是最后一层:依次递归求解，直到最后一层。『向后传播』时，类似一个反向的神经网络。从右往左计算，计算量跟『向前传播』的计算量一样。 小结 在向前传播中，我们求得了$\partial z / \partial w$ 在向后传播中，我们求得了$\partial C / \partial z$ 将上述两者相乘，就得到了参数的微分：$\partial C / \partial w$ 总结 链式求导法则 向前传播求解$\partial z / \partial w$，向后传播求解$\partial C / \partial z$，两者相乘就是参数w的微分 向后传播可以看做一个反向的神经网络，能从右向左依次求出$\partial C / \partial z$]]></content>
