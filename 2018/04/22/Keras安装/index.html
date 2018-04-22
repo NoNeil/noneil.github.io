@@ -126,14 +126,14 @@
 <meta name="description" content="介绍了在macOS上使用Miniconda安装Keras、TensorFlow">
 <meta name="keywords" content="Miniconda,Keras,TensorFlow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Keras安装（macOS 10.13.4）">
+<meta property="og:title" content="Keras安装（CPU版）（macOS 10.13.4）">
 <meta property="og:url" content="http://yoursite.com/2018/04/22/Keras安装/index.html">
 <meta property="og:site_name" content="Neil&#39;s Blog">
 <meta property="og:description" content="介绍了在macOS上使用Miniconda安装Keras、TensorFlow">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-04-22T06:15:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Keras安装（macOS 10.13.4）">
+<meta name="twitter:title" content="Keras安装（CPU版）（macOS 10.13.4）">
 <meta name="twitter:description" content="介绍了在macOS上使用Miniconda安装Keras、TensorFlow">
 
 
@@ -170,7 +170,7 @@
 
 
 
-  <title>Keras安装（macOS 10.13.4） | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Keras安装（CPU版）（macOS 10.13.4） | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -348,7 +348,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Keras安装（macOS 10.13.4）</h1>
+          <h1 class="post-title" itemprop="name headline">Keras安装（CPU版）（macOS 10.13.4）</h1>
         
 
         <div class="post-meta">
@@ -442,6 +442,8 @@
 <p>keras默认的深度学习包是TensorFlow，如果要修改成Theano，编辑<code>~/.keras/keras.json</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cat ~/.keras/keras.json</span><br><span class="line">&#123;</span><br><span class="line">    "image_data_format": "channels_last",</span><br><span class="line">    "floatx": "float32",</span><br><span class="line">    "epsilon": 1e-07,</span><br><span class="line">    "backend": "tensorflow"</span><br><span class="line">&#125;%</span><br></pre></td></tr></table></figure></p>
 <h1 id="安装TensorFlow"><a href="#安装TensorFlow" class="headerlink" title="安装TensorFlow"></a>安装TensorFlow</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pip install tensorflow</span><br></pre></td></tr></table></figure>
 <h1 id="验证是否安装成功"><a href="#验证是否安装成功" class="headerlink" title="验证是否安装成功"></a>验证是否安装成功</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  bin python</span><br><span class="line">Python 3.6.4 |Anaconda, Inc.| (default, Jan 16 2018, 12:04:33)</span><br><span class="line">[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import keras</span><br><span class="line">Using TensorFlow backend.</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print (keras.__version__)</span><br><span class="line">2.1.5</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import tensorflow as tf</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print (tf.__version__)</span><br><span class="line">1.7.0</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="下载Keras-example"><a href="#下载Keras-example" class="headerlink" title="下载Keras example"></a>下载Keras example</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git clone https://github.com/fchollet/keras.git</span><br><span class="line"><span class="meta">$</span> cd keras/examples/</span><br><span class="line"><span class="meta">$</span> python mnist_mlp.py</span><br></pre></td></tr></table></figure>
+<p>附Keras中文文档：<a href="http://keras-cn.readthedocs.io/en/latest/" target="_blank" rel="noopener">http://keras-cn.readthedocs.io/en/latest/</a></p>
 
       
     </div>
@@ -642,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Miniconda"><span class="nav-number">1.</span> <span class="nav-text">安装Miniconda</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装keras"><span class="nav-number">2.</span> <span class="nav-text">安装keras</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装TensorFlow"><span class="nav-number">3.</span> <span class="nav-text">安装TensorFlow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#验证是否安装成功"><span class="nav-number">4.</span> <span class="nav-text">验证是否安装成功</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Miniconda"><span class="nav-number">1.</span> <span class="nav-text">安装Miniconda</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装keras"><span class="nav-number">2.</span> <span class="nav-text">安装keras</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装TensorFlow"><span class="nav-number">3.</span> <span class="nav-text">安装TensorFlow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#验证是否安装成功"><span class="nav-number">4.</span> <span class="nav-text">验证是否安装成功</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载Keras-example"><span class="nav-number">5.</span> <span class="nav-text">下载Keras example</span></a></li></ol></div>
             
 
           </div>
@@ -814,7 +816,7 @@
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2018/04/22/Keras安装/';
           this.page.identifier = '2018/04/22/Keras安装/';
-          this.page.title = 'Keras安装（macOS 10.13.4）';
+          this.page.title = 'Keras安装（CPU版）（macOS 10.13.4）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://neilxu.disqus.com/embed.js';
