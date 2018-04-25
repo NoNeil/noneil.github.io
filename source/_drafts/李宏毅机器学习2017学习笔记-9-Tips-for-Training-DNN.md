@@ -38,6 +38,7 @@ tags:
 2. 自适应的learning rate
 
 ## ReLU
+
 Rectified Linear Unit, 修正的线性单元
 特点：
 * `z > 0`时，输出`z`
@@ -52,15 +53,48 @@ Rectified Linear Unit, 修正的线性单元
 
 有些激活函数的输出为0，另一些激活函数的输出等于输入。
 * 去掉输出为0的激活函数，能简化网络结构。
-* 剩下的输出等于输入的节点，能避免『梯度消失』的问题
+* 剩下的『输出等于输入』的节点，能避免『梯度消失』的问题
 <img src="relu_2.jpg" width="500px">
 
+ReLU是线性的，由ReLU组成的网络是线性的吗？
+
+ReLU的变体
+* Leaky ReLU($\alpha = 0.01$)
+* Parametric ReLU($\alpha$也是学习的参数)
+<img src="relu_variant.jpg" width="500px">
 
 ## Maxout
 
+就是以n个节点为一组，每组做**MaxPooling**，选择最大的一个进到下一层，其他的丢弃。
+<img src="maxout_1.jpg" width="500px">
 
+ReLU是Maxout的特殊形式。
+当每组2个节点，并且其中一个节点的参数都为0，输出$z2=0$时，就是ReLU了。
+<img src="maxout_2.jpg" width="500px">
+如果其中一个节点的参数不为0，输出$z2 \neq 0$，那么得到了一个变体的ReLU，就得到了一个可学习的激活函数。
+<img src="maxout_3.jpg" width="500px">
+
+可学习的激活函数：
+* maxout中的激活函数可以是任意的分段线性凸函数
+* 多少段取决于每组中节点的个数
+<img src="maxout_4.jpg" width="500px">
+
+训练的过程中，随着参数的变化，有时候$z1>z2$，有时候$z1<z2$，那么所有的参数都能学习到。
 
 # 自适应的学习率
+每个参数的learning rate都不一样。
+
+## Adagrad
+* 用固定的learning rate除以『过去所有梯度平方和的平方根』
+* 如果梯度较大，那么learning rate较小；如果梯度较小，那么learning rate较大。
+<img src="adagrad.jpg" width="500px">
+
+## RMSProp
+训练神经网络的时候，Error的等高线图可能会很复杂，如下图中的月牙形。
+我们需要，在同一个方向上，不同的地点的learning rate也不一样。
+<img src="RMSProp_1.jpg" width="500px">
+需要更加动态地调整learning rate。
+<img src="RMSProp_2.jpg" width="500px">
 
 
 # 早点停止训练
