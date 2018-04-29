@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Machine Learning,李宏毅,DNN," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="介绍了使用DNN时的5个要点，如果在训练数据上表现不好，那么是欠拟合。使用『新的激活函数』、『自适应的学习率』等方法。如果在训练数据表现很好，在测试数据上表现不好，那么是过拟合。使用『早点停止训练』、『正则化』、『Dropout』等方法。">
+<meta name="keywords" content="Machine Learning,李宏毅,DNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="李宏毅机器学习2017学习笔记:9.Tips for Training DNN">
+<meta property="og:url" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/index.html">
+<meta property="og:site_name" content="Neil&#39;s Blog">
+<meta property="og:description" content="介绍了使用DNN时的5个要点，如果在训练数据上表现不好，那么是欠拟合。使用『新的激活函数』、『自适应的学习率』等方法。如果在训练数据表现很好，在测试数据上表现不好，那么是过拟合。使用『早点停止训练』、『正则化』、『Dropout』等方法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/recipe_of_dl.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/handwriting_digit_classification.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/vanishing_gradient_problem_0.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/vanishing_gradient_problem.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/relu_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/relu_2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/relu_variant.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/maxout_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/maxout_2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/maxout_3.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/maxout_4.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/adagrad.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/RMSProp_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/RMSProp_2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/momentum.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/adam.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/early_stopping.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/L2_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/L2_2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/L1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/L1vsL2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/brain.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/dropout_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/dropout_2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/dropout_3.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/dropout_4.jpg">
+<meta property="og:updated_time" content="2018-04-22T12:50:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="李宏毅机器学习2017学习笔记:9.Tips for Training DNN">
+<meta name="twitter:description" content="介绍了使用DNN时的5个要点，如果在训练数据上表现不好，那么是欠拟合。使用『新的激活函数』、『自适应的学习率』等方法。如果在训练数据表现很好，在测试数据上表现不好，那么是过拟合。使用『早点停止训练』、『正则化』、『Dropout』等方法。">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/recipe_of_dl.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/"/>
+
+
+
+
+
+  <title>李宏毅机器学习2017学习笔记:9.Tips for Training DNN | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Neil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neil Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Neil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">李宏毅机器学习2017学习笔记:9.Tips for Training DNN</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-22T20:50:05+08:00">
+                2018-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  介绍了使用DNN时的5个要点，如果在训练数据上表现不好，那么是欠拟合。使用『新的激活函数』、『自适应的学习率』等方法。如果在训练数据表现很好，在测试数据上表现不好，那么是过拟合。使用『早点停止训练』、『正则化』、『Dropout』等方法。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>深度学习的步骤跟机器学习一样，也是分三步。<br>当训练好一个模型之后：</p>
+<ul>
+<li>如果在训练数据上表现不好，那么是欠拟合。使用『新的激活函数』、『自适应的学习率』等方法。</li>
+<li>如果在训练数据表现很好，在测试数据上表现不好，那么是过拟合。使用『早点停止训练』、『正则化』、『Dropout』等方法。</li>
+<li>如果在训练数据、测试数据上表现都很好，那么这是个好的模型</li>
+</ul>
+<p><img src="recipe_of_dl.jpg" width="500px"></p>
+<h1 id="新的激活函数"><a href="#新的激活函数" class="headerlink" title="新的激活函数"></a>新的激活函数</h1><p>在手写字符识别中，如果使用sigmoid函数作为激活函数，那么随着网络深度的增加，正确率反而会下降。<br><img src="handwriting_digit_classification.jpg" width="500px"></p>
+<p>那是因为当网络深度太大时，会存在『梯度消失』的问题。</p>
+<p>当固定learnng rate时，后面的参数变化很快，前面的的参数变化很慢。<br>后面的参数已经收敛时，前面的参数几乎没有变化，还是初始时的随机数。<br><img src="vanishing_gradient_problem_0.jpg" width="500px"></p>
+<p>因为sigmoid函数是将输入值$(-\infty, +\infty)$映射到$(-1,+1)$区间，相当于把输入值压扁了，那么在串联多个sigmoid函数的情况下，当改变输入时，没通过一个sigmoid函数，输出就会衰减一次，对最终的输出影响就会很小。<br><img src="vanishing_gradient_problem.jpg" width="500px"></p>
+<p>解决办法：</p>
+<ol>
+<li>逐层训练</li>
+<li>自适应的learning rate</li>
+</ol>
+<h2 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h2><p>Rectified Linear Unit, 修正的线性单元<br>特点：</p>
+<ul>
+<li><code>z &gt; 0</code>时，输出<code>z</code></li>
+<li><code>z &lt; 0</code>时，输出<code>0</code></li>
+</ul>
+<p>优势：</p>
+<ol>
+<li>计算起来很快</li>
+<li>有一定的生物学上原因</li>
+<li>无穷多个不同bias的sigmoid函数叠加的结果</li>
+<li>能解决『梯度消失』的问题<br><img src="relu_1.jpg" width="500px"></li>
+</ol>
+<p>有些激活函数的输出为0，另一些激活函数的输出等于输入。</p>
+<ul>
+<li>去掉输出为0的激活函数，能简化网络结构。</li>
+<li>剩下的『输出等于输入』的节点，能避免『梯度消失』的问题<br><img src="relu_2.jpg" width="500px"></li>
+</ul>
+<p>ReLU是线性的，由ReLU组成的网络是线性的吗？</p>
+<p>ReLU的变体</p>
+<ul>
+<li>Leaky ReLU($\alpha = 0.01$)</li>
+<li>Parametric ReLU($\alpha$也是学习的参数)<br><img src="relu_variant.jpg" width="500px"></li>
+</ul>
+<h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><p>就是以n个节点为一组，每组做<strong>MaxPooling</strong>，选择最大的一个进到下一层，其他的丢弃。<br><img src="maxout_1.jpg" width="500px"></p>
+<p>ReLU是Maxout的特殊形式。<br>当每组2个节点，并且其中一个节点的参数都为0，输出$z2=0$时，就是ReLU了。<br><img src="maxout_2.jpg" width="500px"><br>如果其中一个节点的参数不为0，输出$z2 \neq 0$，那么得到了一个变体的ReLU，就得到了一个可学习的激活函数。<br><img src="maxout_3.jpg" width="500px"></p>
+<p>可学习的激活函数：</p>
+<ul>
+<li>maxout中的激活函数可以是任意的分段线性凸函数</li>
+<li>多少段取决于每组中节点的个数<br><img src="maxout_4.jpg" width="500px"></li>
+</ul>
+<p>训练的过程中，随着参数的变化，有时候$z1&gt;z2$，有时候$z1&lt;z2$，那么所有的参数都能学习到。</p>
+<h1 id="自适应的学习率"><a href="#自适应的学习率" class="headerlink" title="自适应的学习率"></a>自适应的学习率</h1><p>每个参数的learning rate都不一样。</p>
+<h2 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h2><ul>
+<li>用固定的learning rate除以『过去所有梯度平方和的平方根』</li>
+<li>如果梯度较大，那么learning rate较小；如果梯度较小，那么learning rate较大。<br><img src="adagrad.jpg" width="500px"></li>
+</ul>
+<h2 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h2><p>训练神经网络的时候，Error的等高线图可能会很复杂，如下图中的月牙形。<br>我们需要，在同一个方向上，不同的地点的learning rate也不一样。<br><img src="RMSProp_1.jpg" width="500px"></p>
+<p>需要更加动态地调整learning rate。<br>RMSProp相对AdaGrad而言，加了个参数，来调整『过去所有梯度』与『当前梯度』的权重。<br><img src="RMSProp_2.jpg" width="500px"></p>
+<blockquote>
+<p>Yann LeCun说，我们没必要太担心『局部最小值』的问题，因为假设一维参数在某个点存在局部最小值的概率为P，对于一个神经网络而言，有成千上万个参数，在高维空间中，必须是所有参数在这个点都取得极小值，那么这个概率就很小了。</p>
+<p>听起来似乎很有道理。但是从现实生活中来看，现实生活中的地面就有很多坑坑洼洼，每个坑出现的概率又不是很低呀。</p>
+</blockquote>
+<h2 id="Momentum-惯性"><a href="#Momentum-惯性" class="headerlink" title="Momentum(惯性)"></a>Momentum(惯性)</h2><ul>
+<li>一般的梯度下降法的移动方向：梯度方向的反方向</li>
+<li>每次移动的方向：上次移动的方向+本次的梯度方向的反方向</li>
+</ul>
+<p>如下图，$\lambda$越大，上次移动的方向的权重越大。<br>第i次的移动方向，考虑了前面i-1次的梯度方向，是i-1次梯度的加权和。<br><img src="momentum.jpg" width="500px"></p>
+<h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><p>RMSPros+Momentum<br><img src="adam.jpg" width="500px"></p>
+<h1 id="早点停止训练"><a href="#早点停止训练" class="headerlink" title="早点停止训练"></a>早点停止训练</h1><p>使用<code>Validation Set</code>来验证，找出什么时候停止训练。<br><img src="early_stopping.jpg" width="500px"></p>
+<p>Keras中可以调用<code>EarlyStopping</code>，来实现：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> EarlyStopping</span><br><span class="line">early_stopping = EarlyStopping(monitor=<span class="string">'val_loss'</span>, patience=<span class="number">2</span>)</span><br><span class="line">model.fit(x, y, validation_split=<span class="number">0.2</span>, callbacks=[early_stopping])</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://keras.io/getting-started/faq/#how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore" target="_blank" rel="noopener">Keras文档链接</a></p>
+<h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h1><p>正则化就是在损失函数上添加参数的约束项，使参数的值尽可能得趋近于<code>0</code>.</p>
+<blockquote>
+<p>在神经网络的训练中，正则化的效果往往不是很明显。<br>梯度下降的作用是不断迭代使参数离<code>0</code>越来越远，正则化的效果是让参数不要离<code>0</code>太远，实际上可能减少迭代次数也能达到同样的效果。</p>
+</blockquote>
+<h2 id="L2正则"><a href="#L2正则" class="headerlink" title="L2正则"></a>L2正则</h2><p><img src="L2_1.jpg" width="500px"><br><strong>正则化会是函数变得平滑，所以用正则化并不会改变函数的bias</strong><br>求导，合并同类项。<br>$\lambda$一般取很小的值，如0.01。那么$\eta \cdot \lambda$的值趋近于0，$(1- \eta \cdot \lambda)$的值趋近于0.99。<br>也就是说，每次更新参数<code>w</code>时，都让它先乘以0.99，经过多次迭代，就越来越趋近于0.有对参数『惩罚』的效果。<br>再加上后面的微分项，保证参数<code>w</code>不会全部为0.<br><img src="L2_2.jpg" width="500px"></p>
+<h2 id="L1正则"><a href="#L1正则" class="headerlink" title="L1正则"></a>L1正则</h2><ol>
+<li>当 $w&gt;0$ 时，减掉一个正数，<code>w</code>往0逼近；</li>
+<li>当 $w&gt;0$ 时，减掉一个负数，<code>w</code>还是往0逼近；<br><img src="L1.jpg" width="500px"></li>
+</ol>
+<h2 id="L1-V-S-L2"><a href="#L1-V-S-L2" class="headerlink" title="L1 V.S. L2"></a>L1 V.S. L2</h2><p><img src="L1vsL2.jpg" width="500px"></p>
+<ol>
+<li>L2每次更新参数时，都会乘上0.99；L1每次更新参数时，都会加上/减掉一个固定的值。</li>
+<li>假设参数为10000，使用两种正则化方法。使用L2时，乘上0.99，那么一次性减掉了100；使用L1时，减掉一个固定的值0.99。也就是说，L2更能避免参数过大的情况。</li>
+<li>假设参数为1，使用两种正则化方法。使用L2时，乘上0.99，那么一次性减掉了0.01；使用L1时，减掉一个固定的值0.99。也就是说，L1更能使参数为0.</li>
+<li>所以，使用L2时，能使参数不至于过大，使大部分参数都接近0，但等于0的个数不会太多；使用L1时，会出现比较多的参数比较大的情况，也会出现比较多的参数为0的情况。</li>
+</ol>
+<h2 id="生物学解释"><a href="#生物学解释" class="headerlink" title="生物学解释"></a>生物学解释</h2><p>生物学上，刚出生的人脑神经元的链接不较少；6岁的时候出现大量的神经元链接；14岁的时候链接变少，就像『稀疏参数』一样。<br><img src="brain.jpg" width="500px"></p>
+<h1 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h1><p>只对『输入层』和『隐含层』进行Dropout操作。</p>
+<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><ul>
+<li><p>训练阶段：对于每个mini-batch，更新参数时，先对所有神经元进行采样，每个神经元以<code>p</code>的概率被丢弃掉。</p>
+</li>
+<li><p>测试阶段：使用所有的参数，但是每个参数都要乘以<code>1-p</code>。<br>因为训练时，只保留了<code>1-p</code>部分的神经元；但是测试时，使用的是所有神经元，所以直观地需要将参数乘以<code>1-p</code>（如果激活函数是线性函数）。</p>
+</li>
+</ul>
+<p>就像训练的时候，只用一部分神经元来训练，得到的是多个比较弱的分类器。测试的时候，用所有神经元，就能得到更好的效果。<br><img src="dropout_1.jpg" width="500px"></p>
+<h2 id="Dropout是一种ensamble方法"><a href="#Dropout是一种ensamble方法" class="headerlink" title="Dropout是一种ensamble方法"></a>Dropout是一种ensamble方法</h2><p>Ensemble方法（Bagging）：<br>从一个很大的训练集中采样出多个子集（一部分样本），分别训练出多个模型。<br><img src="dropout_2.jpg" width="500px"></p>
+<p>如果每个模型都足够复杂，那么这些模型的bias很小，variance很大。多个模型平均之后，variance就很小了。</p>
+<p>Dropout方法是：</p>
+<ul>
+<li>用每个mini-batch去训练一个神经网络；</li>
+<li>有些参数在网络之间是共享的；<br><img src="dropout_3.jpg" width="500px"></li>
+</ul>
+<p>当参数个数为<code>M</code>是，可能存在 $2^M$ 个。如果穷举 $2^M$ 种情况，计算量太大了。</p>
+<p>在测试阶段：</p>
+<ul>
+<li>『Ensemble』是直接对多个模型的输出求平均</li>
+<li>『Dropout』是将参数乘以<code>1-p</code></li>
+</ul>
+<p>如果激活函数是线性函数的话，这种将参数乘以<code>1-p</code>的方法是完全可行的。如下图：<br><img src="dropout_4.jpg" width="500px"></p>
+<p>神奇的是，即使激活函数不是线性的，也是work的。</p>
+<p>所以，对于激活函数比较接近<strong>线性</strong>的情况，如ReLU、MaxOut，使用Dropout方法时能得到更好从效果。</p>
+<p>也就是说，如果你已经决定了使用了Dropout，那么在选择激活函数时，尽量选择比较接近<strong>线性</strong>的，如ReLU、MaxOut，而不是sigmoid。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li>如果在训练数据上表现不好，那么是欠拟合。使用『新的激活函数』、『自适应的学习率』等方法。如果在训练数据表现很好，在测试数据上表现不好，那么是过拟合。使用『早点停止训练』、『正则化』、『Dropout』等方法。</li>
+<li>新的激活函数：ReLU，Maxout</li>
+<li>自适应的学习率：Adagram、RMSProp、Momentum、Adam</li>
+<li>早点停止训练：交叉验证</li>
+<li>正则化：L1能使更多的参数为0，L2能使更多的参数接近0</li>
+<li>Dropout：一种Enseble方法，训练时参数要乘以<code>1-p</code></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/李宏毅/" rel="tag"># 李宏毅</a>
+          
+            <a href="/tags/DNN/" rel="tag"># DNN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/22/Keras安装/" rel="next" title="Keras安装（CPU版）（macOS 10.13.4）">
+                <i class="fa fa-chevron-left"></i> Keras安装（CPU版）（macOS 10.13.4）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Neil Xu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/NoNeil" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/drneil" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新的激活函数"><span class="nav-number">2.</span> <span class="nav-text">新的激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLU"><span class="nav-number">2.1.</span> <span class="nav-text">ReLU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">2.2.</span> <span class="nav-text">Maxout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自适应的学习率"><span class="nav-number">3.</span> <span class="nav-text">自适应的学习率</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Adagrad"><span class="nav-number">3.1.</span> <span class="nav-text">Adagrad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RMSProp"><span class="nav-number">3.2.</span> <span class="nav-text">RMSProp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Momentum-惯性"><span class="nav-number">3.3.</span> <span class="nav-text">Momentum(惯性)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adam"><span class="nav-number">3.4.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#早点停止训练"><span class="nav-number">4.</span> <span class="nav-text">早点停止训练</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化"><span class="nav-number">5.</span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#L2正则"><span class="nav-number">5.1.</span> <span class="nav-text">L2正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L1正则"><span class="nav-number">5.2.</span> <span class="nav-text">L1正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L1-V-S-L2"><span class="nav-number">5.3.</span> <span class="nav-text">L1 V.S. L2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生物学解释"><span class="nav-number">5.4.</span> <span class="nav-text">生物学解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dropout"><span class="nav-number">6.</span> <span class="nav-text">Dropout</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作方法"><span class="nav-number">6.1.</span> <span class="nav-text">操作方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout是一种ensamble方法"><span class="nav-number">6.2.</span> <span class="nav-text">Dropout是一种ensamble方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Neil Xu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://neilxu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/';
+          this.page.identifier = '2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/';
+          this.page.title = '李宏毅机器学习2017学习笔记:9.Tips for Training DNN';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://neilxu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+</body>
+</html>
