@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Machine Learning,李宏毅,CNN," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="介绍了什么情况需要用CNN：图像中的特征是局部特征、同样的特征可能出现在不同的地方、下采样不影响图像中的物品。介绍了CNN的几个常用操作：卷积、池化、Flatten等。通过最大化输出，反推输入。分析CNN从图像中学到了什么。最后介绍了CNN的几个应用：Deep Style、Alpha GO、语音处理、文本处理。">
+<meta name="keywords" content="Machine Learning,李宏毅,CNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="李宏毅机器学习2017学习笔记:10.CNN">
+<meta property="og:url" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/index.html">
+<meta property="og:site_name" content="Neil&#39;s Blog">
+<meta property="og:description" content="介绍了什么情况需要用CNN：图像中的特征是局部特征、同样的特征可能出现在不同的地方、下采样不影响图像中的物品。介绍了CNN的几个常用操作：卷积、池化、Flatten等。通过最大化输出，反推输入。分析CNN从图像中学到了什么。最后介绍了CNN的几个应用：Deep Style、Alpha GO、语音处理、文本处理。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/CNN_1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/CNN_2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/conv.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/cnn_param_3.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/cnn_param_2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/cnn_param.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/cnn_learn_1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/cnn_learn_2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/cnn_learn_3.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/cnn_learn_4.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/deep_dream.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/deep_style.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/cnn_speech.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/cnn_text.png">
+<meta property="og:updated_time" content="2018-05-01T02:15:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="李宏毅机器学习2017学习笔记:10.CNN">
+<meta name="twitter:description" content="介绍了什么情况需要用CNN：图像中的特征是局部特征、同样的特征可能出现在不同的地方、下采样不影响图像中的物品。介绍了CNN的几个常用操作：卷积、池化、Flatten等。通过最大化输出，反推输入。分析CNN从图像中学到了什么。最后介绍了CNN的几个应用：Deep Style、Alpha GO、语音处理、文本处理。">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/CNN_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/"/>
+
+
+
+
+
+  <title>李宏毅机器学习2017学习笔记:10.CNN | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Neil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neil Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Neil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">李宏毅机器学习2017学习笔记:10.CNN</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-01T10:15:16+08:00">
+                2018-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  介绍了什么情况需要用CNN：图像中的特征是局部特征、同样的特征可能出现在不同的地方、下采样不影响图像中的物品。介绍了CNN的几个常用操作：卷积、池化、Flatten等。通过最大化输出，反推输入。分析CNN从图像中学到了什么。最后介绍了CNN的几个应用：Deep Style、Alpha GO、语音处理、文本处理。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="为什么要用CNN"><a href="#为什么要用CNN" class="headerlink" title="为什么要用CNN"></a>为什么要用CNN</h1><ol>
+<li>识别一个图像时，我们可能更关注局部特征，那么每一个神经元不需要连接整个图像，只需要连接一个小的区域</li>
+<li>同样的特征可能出现在不同的位置</li>
+<li>对图像进行下采样，并不会改变图像中的物品</li>
+</ol>
+<p>其中，第1、3点能减少网络中的参数个数。<br><img src="CNN_1.png" alt="CNN"></p>
+<h1 id="CNN的3个属性"><a href="#CNN的3个属性" class="headerlink" title="CNN的3个属性"></a>CNN的3个属性</h1><ol>
+<li>有些pattern只占整张图像的很小一部分（通过卷积实现）</li>
+<li>同样的pattern可能出现在不同的位置（通过卷积实现）</li>
+<li>下采样不会改变图像中的物品（通过池化实现）</li>
+</ol>
+<h1 id="卷积、池化、Flatten"><a href="#卷积、池化、Flatten" class="headerlink" title="卷积、池化、Flatten"></a>卷积、池化、Flatten</h1><p>CNN的几个主要操作包括：卷积、池化、Flatten。中间可以选择添加<code>Dropout</code>操作。<br><img src="CNN_2.png" width="500px"></p>
+<h2 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h2><p>每一个卷积模板就是一种特征的滤波器，用于探测一种类型的特征。</p>
+<p>如下图，卷积模板用于探测『右下斜线』的特征，当图像中出现这种特征的时候，会在卷积结果中体现出来。<br><img src="conv.png" width="500px"></p>
+<p>每一个二维的Matrix经过一个模板进行卷积之后的结果为一个『Feature Map』。<br>经过多个模板卷积之后，结果为多个『Feature Map』，每一个可以看做一个channel。</p>
+<p>当输入为彩色图像时，输入的channel为3。经过k个filter卷积之后，得到k个feature map，相当于k个channel。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.add(Conv2D(<span class="number">50</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h2><p>分Max Pooling、Average Pooling等，一般采用Max Pooling。</p>
+<p>后面可以选择地接一个Dropout。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model.add(MaxPooling2D(pool_size=(<span class="number">2</span>, <span class="number">2</span>)))</span><br><span class="line">model.add(Dropout(<span class="number">0.25</span>))</span><br></pre></td></tr></table></figure></p>
+<h2 id="Flatten"><a href="#Flatten" class="headerlink" title="Flatten"></a>Flatten</h2><p>在卷积和池化之后，将输出的多维Matrix拉成一个一维的向量。<br>如下图，向量维度为<code>50*5*5=1250</code><br><img src="cnn_param_3.png" width="500px"></p>
+<p>在后面接一个全连接的网络(后面可以选择地接一个Dropout)，再在最后接一个softmax网络。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model.add(Flatten())</span><br><span class="line">model.add(Dense(<span class="number">100</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.5</span>))</span><br><span class="line">model.add(Dense(num_classes, activation=<span class="string">'softmax'</span>))</span><br></pre></td></tr></table></figure></p>
+<h2 id="卷积层的参数个数"><a href="#卷积层的参数个数" class="headerlink" title="卷积层的参数个数"></a>卷积层的参数个数</h2><p>使用Keras实现CNN：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line">model.add(Conv2D(<span class="number">25</span>, kernel_size=(<span class="number">3</span>, <span class="number">3</span>),</span><br><span class="line">                    activation=<span class="string">'relu'</span>,</span><br><span class="line">                    input_shape=input_shape))</span><br><span class="line">model.add(MaxPooling2D(pool_size=(<span class="number">2</span>, <span class="number">2</span>)))</span><br><span class="line">model.add(Conv2D(<span class="number">50</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(MaxPooling2D(pool_size=(<span class="number">2</span>, <span class="number">2</span>)))</span><br><span class="line">model.add(Dropout(<span class="number">0.25</span>))</span><br><span class="line">model.add(Flatten())</span><br><span class="line">model.add(Dense(<span class="number">100</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.5</span>))</span><br><span class="line">model.add(Dense(num_classes, activation=<span class="string">'softmax'</span>))</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>第1个卷积层：有25个filter，每个filter的参数个数为<code>3*3=9</code>，共有<code>25*9=245</code>个参数</li>
+<li>第2个卷积层：有50个filter，每个filter的参数个数为<code>3*3*25=225</code>，共有<code>225*9=11250</code>个参数<br><img src="cnn_param_2.png" width="500px"></li>
+</ol>
+<p>TensorFlow中在每个filter上多加了一个参数，所以每个filter的参数个数都要<strong>加1</strong>。<strong>这个参数是干嘛的呢？</strong></p>
+<ol>
+<li>第1个卷积层：每个filter的参数个数为<code>3*3+1=10</code>，共有<code>25*10=250</code>个参数</li>
+<li>第2个卷积层：每个filter的参数个数为<code>3*3*25+1=226</code>，共有<code>226*9=11300</code>个参数<br><img src="cnn_param.png" width="500px"></li>
+</ol>
+<h1 id="CNN从图像中学到了什么"><a href="#CNN从图像中学到了什么" class="headerlink" title="CNN从图像中学到了什么"></a>CNN从图像中学到了什么</h1><blockquote>
+<p>我们前面有个猜想：每个filter能探测图像中特定的pattern。<br>那么，反过来想：输入什么样的图像，经过一个filter卷积之后，会使输出值最大。</p>
+</blockquote>
+<h2 id="最大化卷积的输出（feature-map）的『输出值的度量』"><a href="#最大化卷积的输出（feature-map）的『输出值的度量』" class="headerlink" title="最大化卷积的输出（feature map）的『输出值的度量』"></a>最大化卷积的输出（feature map）的『输出值的度量』</h2><p>定义，第k个filter的『输出值的度量』：<br>$$a^k = \sum_{i=1}^{dim} \sum_{j=1}^{dim} a_{ij}^k$$</p>
+<p>我们的目标是寻找最优的输入$x^\ast$，使$a^k$最大：<br>$$x^\ast = arg \max_x a^k$$<br>优化方法：梯度下降法得到。</p>
+<p>如下图，12个filter分别得到的结果。<br>可以看到不同的filter能探测不同的局部特征：竖条纹、横条纹、斜条纹等。<br><img src="cnn_learn_1.png" width="500px"></p>
+<h2 id="最大化全连接网络的输出"><a href="#最大化全连接网络的输出" class="headerlink" title="最大化全连接网络的输出"></a>最大化全连接网络的输出</h2><p>定义，第j个神经元的输出值：$a^j$<br>目标函数：<br>$$x^\ast = arg \max_x a^j$$</p>
+<p>这个神经元探测的就不是局部特征了，而是全局特征。但是用这种方法做出的效果并不好，图像并不像数字。<br><img src="cnn_learn_2.png" width="500px"></p>
+<h2 id="最大化softmax的输出"><a href="#最大化softmax的输出" class="headerlink" title="最大化softmax的输出"></a>最大化softmax的输出</h2><p>目标函数：<br>$$x^\ast = arg \max_x y^i$$<br>如下图，可以看出，尽管图像看着像『花屏』的图像，但是CNN任然认为这是数字。<br><img src="cnn_learn_3.png" width="500px"></p>
+<h2 id="对目标函数加上约束"><a href="#对目标函数加上约束" class="headerlink" title="对目标函数加上约束"></a>对目标函数加上约束</h2><p>因为，手写字符的图像中，只有字迹的地方的像素值是大于0的。<br>所以，我们可以对像素值$x_{i,j}$添加约束条件。</p>
+<p>如下图，得到的结果比之前的好多了，比如数字<code>6</code>。<br>但是结果还不是很好，可以再加一些约束：如相邻的像素具有相同的颜色等。<br><img src="cnn_learn_4.png" width="500px"></p>
+<h1 id="CNN的一些应用"><a href="#CNN的一些应用" class="headerlink" title="CNN的一些应用"></a>CNN的一些应用</h1><h2 id="Deep-Dram"><a href="#Deep-Dram" class="headerlink" title="Deep Dram"></a>Deep Dram</h2><blockquote>
+<p>给定一张图像，机器会加上他看到的东西。(得到的效果很恶心)<br>步骤：</p>
+<ol>
+<li>对于一个已经训练好的CNN，输入一张图片，把某个filter的参数或者全连接层的某个神经元的输出调大；</li>
+<li>把调大后的值作为目标，调整输入图像，使输出更接近目标。</li>
+</ol>
+</blockquote>
+<p><img src="deep_dream.png" width="500px"></p>
+<h2 id="Deep-Style"><a href="#Deep-Style" class="headerlink" title="Deep Style"></a>Deep Style</h2><ul>
+<li>一个图像放到CNN中，得到filter的输出，表示图像的content</li>
+<li>另一个图像放到CNN中，得到filter之间的correlation，表示图像的style</li>
+<li>用同一个CNN，照一张image，同时使content像左边的图像、style像右边的图像</li>
+</ul>
+<p>论文链接 A Neural Algorithm of Artistic Style ：<a href="https://arxiv.org/abs/1508.06576" target="_blank" rel="noopener">https://arxiv.org/abs/1508.06576</a><br><img src="deep_style.png" width="500px"></p>
+<h2 id="下围棋"><a href="#下围棋" class="headerlink" title="下围棋"></a>下围棋</h2><p>用全连接前馈网络也可以，但是用CNN效果更好。<br>显然地，围棋满足CNN的前两个特点。Alpha GO没使用Max Pooling。</p>
+<h2 id="语音处理"><a href="#语音处理" class="headerlink" title="语音处理"></a>语音处理</h2><p>声谱图：横坐标是时间，纵坐标是频率。颜色表示频率的能量的强度，红色表示该频率的强度很高。<br>下面一个图是『你好』的声谱图，左边是『你』，右边是『好』。<br>使用CNN，对每一段声谱进行分类，卷积移动的方向只沿着频率的方向（从上往下进行卷积）。得到音标，然后连接处理成文本。<br><img src="cnn_speech.png" width="500px"></p>
+<h2 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h2><p>把文本当做图像进行处理，横坐标是句子（各个单词），中坐标是单词的word embedding。<br>这里卷积移动的方向是句子的方向（从左往右）。<br><img src="cnn_text.png" width="500px"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li>介绍了什么情况下需要用CNN，也就是CNN解决的三个问题。分别是图像中的特征是局部特征、同样的特征可能出现在不同的地方、下采样不影响图像中的物品。</li>
+<li>介绍了CNN的几个常用操作：卷积、池化、Flatten等</li>
+<li>通过最大化输出，反推输入。分析CNN从图像中学到了什么。</li>
+<li>介绍了CNN的几个应用：Deep Style、Alpha GO、语音处理、文本处理。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/李宏毅/" rel="tag"># 李宏毅</a>
+          
+            <a href="/tags/CNN/" rel="tag"># CNN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/22/李宏毅机器学习2017学习笔记-9-Tips-for-Training-DNN/" rel="next" title="李宏毅机器学习2017学习笔记:9.Tips for Training DNN">
+                <i class="fa fa-chevron-left"></i> 李宏毅机器学习2017学习笔记:9.Tips for Training DNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Neil Xu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/NoNeil" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/drneil" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要用CNN"><span class="nav-number">1.</span> <span class="nav-text">为什么要用CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN的3个属性"><span class="nav-number">2.</span> <span class="nav-text">CNN的3个属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卷积、池化、Flatten"><span class="nav-number">3.</span> <span class="nav-text">卷积、池化、Flatten</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积"><span class="nav-number">3.1.</span> <span class="nav-text">卷积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#池化"><span class="nav-number">3.2.</span> <span class="nav-text">池化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flatten"><span class="nav-number">3.3.</span> <span class="nav-text">Flatten</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积层的参数个数"><span class="nav-number">3.4.</span> <span class="nav-text">卷积层的参数个数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN从图像中学到了什么"><span class="nav-number">4.</span> <span class="nav-text">CNN从图像中学到了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最大化卷积的输出（feature-map）的『输出值的度量』"><span class="nav-number">4.1.</span> <span class="nav-text">最大化卷积的输出（feature map）的『输出值的度量』</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最大化全连接网络的输出"><span class="nav-number">4.2.</span> <span class="nav-text">最大化全连接网络的输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最大化softmax的输出"><span class="nav-number">4.3.</span> <span class="nav-text">最大化softmax的输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对目标函数加上约束"><span class="nav-number">4.4.</span> <span class="nav-text">对目标函数加上约束</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN的一些应用"><span class="nav-number">5.</span> <span class="nav-text">CNN的一些应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Deep-Dram"><span class="nav-number">5.1.</span> <span class="nav-text">Deep Dram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deep-Style"><span class="nav-number">5.2.</span> <span class="nav-text">Deep Style</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下围棋"><span class="nav-number">5.3.</span> <span class="nav-text">下围棋</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语音处理"><span class="nav-number">5.4.</span> <span class="nav-text">语音处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本处理"><span class="nav-number">5.5.</span> <span class="nav-text">文本处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Neil Xu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://neilxu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/';
+          this.page.identifier = '2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/';
+          this.page.title = '李宏毅机器学习2017学习笔记:10.CNN';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://neilxu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+</body>
+</html>
