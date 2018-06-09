@@ -66,3 +66,86 @@ Bagging的原理就是：通过将多个『复杂模型』求平均，来降低V
 [Scikit-learn中几种常用的特征选择方法](https://www.cnblogs.com/hhh5460/p/5186226.html)
 
 # Boosting
+Boosting将多个『弱模型』进行组合，得到一个强分类器。
+
+**理论前提：**如果一个分类器的错误率小于0.5，经过Boosting后，它就能得到一个错误率为0的分类器。
+
+对于二分类而言，我们总是能找到一个$\varepsilon < 0.5$的分类器。因为如果$\varepsilon > 0.5$，只需要将预测结果翻转，就能使$\varepsilon < 0.5$了。
+
+**Boosting的框架：**
+1. 得到第一个弱分类器$f_1(x)$
+2. 找到另一个分类器$f_2(x)$去辅助$f_1(x)$。$f_2(x)$起到对$f_1(x)$弥补的作用。
+3. 按照以上方法，**依次**得到`k`分类器$f_3(x), f_4(x)$...$f_k(x)$
+
+**备注：**
+* Bagging的每个子分类器都是强分类器；Boosting的是弱分类器。
+* Bagging的分类器是无序的；Boosting的则是序列的。
+
+**在上一个分类器的基础上，如何得到不同的分类器？**：制造不同的训练数据集。
+具体方法：
+1. 重采样（也可以理解成改变样本的权重）
+2. 改变每个样本的权重
+3. 在改变权重的基础上，也要响应地修改损失函数.
+<img src="reweight_1.jpg" width="300px">
+
+## AdaBoosting
+AdaBoosting的原理是通过改变数据的分布，来使上次被分错的样本被分对。
+
+具体做法是：根据模型的准确率和样本是否被分对，来修改样本的权重。如果某个样本被分错，则增加该样本的权重；否则降低该样本的权重。
+
+假设：$f_1(x)$的错误率为：$\varepsilon_1$
+$$\varepsilon_1 = \frac {\sum_n u_1^n \delta(f_1(x^n) \neq \hat y^n)} {Z_1}$$
+其中，$u_1$为样本的权重，$Z_1$是权重的和，$Z_1=\sum_n u_1^n$
+
+为了使$f_2(x)$对$f_1(x)$起到『互补』的作用，我们要增加分错的样本的权重。
+同时，更新权重会使$f_1(x)$的错误率上升。上升到什么程度呢？最多达到$\varepsilon_1 = 0.5$，也就是：
+$$\frac {\sum_n u_2^n \delta(f_1(x^n) \neq \hat y^n)} {Z_2} = 0.5$$
+更新权重后，训练得到$f_2(x)$.
+
+举个例子，如下图：
+1. 第一轮，每个样本的权重都为`1`，$f_1(x)$的错误率$\varepsilon_1=0.25$。
+2. 更新权重后，$f_1(x)$的错误率变为$\varepsilon_1=0.5$，$f_1(x)$的$\varepsilon_1<0.5$
+<img src="reweight_2.jpg" width="500px">
+
+### 如何更新权重
+分错的样本权重增加，分对的样本权重降低。
+
+设:更新前的权重为$u_1$，更新后的权重为$u_2$
+
+更新前：
+<img src="reweight_3.jpg" width="300px">
+
+更新权重：
+<img src="reweight_4.jpg" width="300px">
+
+更新后，$f_1(x)$的$\varepsilon_1=0.5$：
+<img src="reweight_5.jpg" width="300px">
+
+上式的『分子部分』是分错的部分：
+<img src="reweight_6.jpg" width="300px">
+『分母部分』是分错+分对两部分：
+<img src="reweight_7.jpg" width="450px">
+
+也就是：
+<img src="reweight_8.jpg" width="400px">
+
+变换，提取出$d_1$：
+<img src="reweight_9.jpg" width="300px">
+
+$d_1$的平方，就是『分对样本的个数』除以『分错样本的个数』：
+<img src="reweight_10.jpg" width="180px">
+所以，可以求出$d_1$，大于1：
+<img src="reweight_11.jpg" width="200px">
+
+设：$\alpha = \ln d$，则权重更新时乘以$exp(\alpha)$或$exp(-\alpha)$，使表达式更简洁。
+<img src="reweight_12.jpg" width="300px">
+
+### AdaBoost的步骤
+1. 训练`T`个弱分类器：
+<img src="adaboost_1.jpg" width="500px">
+2. 将`T`个弱分类器进行加权平均:
+<img src="adaboost_2.jpg" width="200px">
+对于每个弱分类器而言，错误率越低，$\alpha$越大，表示这个弱分类器的权重更大。这是合情合理的。
+
+### 最终的分类器的错误率
+
