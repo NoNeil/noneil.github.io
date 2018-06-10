@@ -147,5 +147,77 @@ $d_1$的平方，就是『分对样本的个数』除以『分错样本的个数
 <img src="adaboost_2.jpg" width="200px">
 对于每个弱分类器而言，错误率越低，$\alpha$越大，表示这个弱分类器的权重更大。这是合情合理的。
 
-### 最终的分类器的错误率
+### 最终分类器的错误率
 
+最终的分类器为：
+$$ H(x) = sign(\sum_{t-1}^T \alpha_t f_t(x) $$
+
+错误率为：
+$$ \varepsilon = \frac 1 N \sum \delta(H(x^n) \neq \hat y^n)$$
+令，$g(x) = \sum_{t-1}^T \alpha_t f_t(x)$
+那么，$$ \varepsilon = \frac 1 N \sum \delta(\hat y^n g(x^n) < 0) $$
+
+#### 错误率的上限
+
+上式错误率有个上限，如下图：
+$$ \varepsilon \le \frac 1 N \sum exp(-\hat y^n g(x^n)) $$
+<img src="error_rate_1.jpg" width="300px">
+
+#### 错误率的上限等于样本权重的均值
+样本的权重，可以通过递推公式求出：
+<img src="error_rate_2.jpg" width="500px">
+将求和操作变换到`exp`的指数上：
+<img src="error_rate_3.jpg" width="300px">
+
+于是，可以得到错误率的上限：
+<img src="error_rate_4.jpg" width="350px">
+
+#### 样本权重的和随着迭代次数递减
+样本权重的和，可以通过递推公式求出：
+<img src="error_rate_5.jpg" width="380px">
+左侧为分错的样本，右侧为分对的样本。
+
+$Z_{t}$可以由$Z_{t-1}$求出：
+<img src="error_rate_6.jpg" width="400px">
+
+由于$Z_{1}=N$，那么$Z_{T+1}$为：
+<img src="error_rate_7.jpg" width="300px">
+
+也就是，
+<img src="error_rate_9.jpg" width="300px">
+
+如下图，$4 x (1-x)$在$x=0.5$时取得最大值`1`，也就是$2\sqrt{ \epsilon (1-\epsilon)} < 1$
+<img src="error_rate_8.png" width="300px">
+
+所以，错误率会随着迭代次数的增加，越来越小。
+
+### 一个重要特性
+随着弱分类器的个数的增加，尽管`training error`已经为`0`，但是`testing error`依然能够继续降低。
+<img src="one_character_1.jpg" width="500px">
+
+分析：
+定义一个`Margin`，$Margin = \hat y g(x)$，其中$g(x) = \sum_{t=1}^T \alpha_t f_t(x)$.
+
+随着弱分类器个数的增加，`Margin`随之增加，因此能继续降低`testing error`。
+
+这个`Margin`有点类似`SVM`的效果。
+
+如下图，AdaBoost的`training error`为绿色的线，当所有的$\hat y g(x) > 0$时，`training error`为0.
+但是，AdaBoost的`training error`有个上限，红色的曲线，随着$\hat y g(x)$增加，这个上限任然继续降低。这就是`testing error`继续降低的原因。
+
+同时，我们也可以看到`SVM`与`Logistic Regression`的区别，因为`SVM`只根据支持向量来计算`Margin`，`LR`则是根据所有样本来计算`Margin`。
+<img src="one_character_2.jpg" width="500px">
+
+**更多资料**
+* Introduction of Adaboost:
+• Freund; Schapire (1999). "A Short Introduction to Boosting“
+* Multiclass/Regression
+• Y. Freund, R. Schapire, “A Decision-Theoretic Generalization of on-Line
+Learning and an Application to Boosting”, 1995.
+• Robert E. Schapire and Yoram Singer. Improved boosting algorithms using confidence-rated predictions. In Proceedings of the Eleventh Annual Conference on Computational Learning Theory, pages 80–91, 1998.
+* Gentle Boost
+• Schapire, Robert; Singer, Yoram (1999). "Improved Boosting Algorithms Using Confidence-rated Predictions".
+
+## Gradient Boosting
+
+# Stacking
