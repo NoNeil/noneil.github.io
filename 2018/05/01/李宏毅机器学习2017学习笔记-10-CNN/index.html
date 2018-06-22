@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Machine Learning,李宏毅,CNN," />
+  <meta name="keywords" content="李宏毅,Machine Learning,CNN," />
 
 
 
@@ -124,7 +124,7 @@
 
 
 <meta name="description" content="介绍了什么情况需要用CNN：图像中的特征是局部特征、同样的特征可能出现在不同的地方、下采样不影响图像中的物品。介绍了CNN的几个常用操作：卷积、池化、Flatten等。通过最大化输出，反推输入。分析CNN从图像中学到了什么。最后介绍了CNN的几个应用：Deep Style、Alpha GO、语音处理、文本处理。">
-<meta name="keywords" content="Machine Learning,李宏毅,CNN">
+<meta name="keywords" content="李宏毅,Machine Learning,CNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="李宏毅机器学习2017学习笔记:10.CNN">
 <meta property="og:url" content="http://yoursite.com/2018/05/01/李宏毅机器学习2017学习笔记-10-CNN/index.html">
@@ -452,13 +452,13 @@
         <h1 id="为什么要用CNN"><a href="#为什么要用CNN" class="headerlink" title="为什么要用CNN"></a>为什么要用CNN</h1><ol>
 <li>识别一个图像时，我们可能更关注局部特征，那么每一个神经元不需要连接整个图像，只需要连接一个小的区域</li>
 <li>同样的特征可能出现在不同的位置</li>
-<li>对图像进行下采样，并不会改变图像中的物品</li>
+<li>对图像进行下采样，并不会改变图像中的物体</li>
 </ol>
 <p>其中，第1、3点能减少网络中的参数个数。<br><img src="CNN_1.png" alt="CNN"></p>
 <h1 id="CNN的3个属性"><a href="#CNN的3个属性" class="headerlink" title="CNN的3个属性"></a>CNN的3个属性</h1><ol>
 <li>有些pattern只占整张图像的很小一部分（通过卷积实现）</li>
 <li>同样的pattern可能出现在不同的位置（通过卷积实现）</li>
-<li>下采样不会改变图像中的物品（通过池化实现）</li>
+<li>下采样不会改变图像中的物体（通过池化实现）</li>
 </ol>
 <h1 id="卷积、池化、Flatten"><a href="#卷积、池化、Flatten" class="headerlink" title="卷积、池化、Flatten"></a>卷积、池化、Flatten</h1><p>CNN的几个主要操作包括：卷积、池化、Flatten。中间可以选择添加<code>Dropout</code>操作。<br><img src="CNN_2.png" width="500px"></p>
 <h2 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h2><p>每一个卷积模板就是一种特征的滤波器，用于探测一种类型的特征。</p>
@@ -551,9 +551,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
-          
             <a href="/tags/李宏毅/" rel="tag"># 李宏毅</a>
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
             <a href="/tags/CNN/" rel="tag"># CNN</a>
           
@@ -577,6 +577,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/19/李宏毅机器学习2017学习笔记-14-Ensemble/" rel="prev" title="李宏毅机器学习2017学习笔记:14.Ensemble">
+                李宏毅机器学习2017学习笔记:14.Ensemble <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -663,7 +667,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -685,7 +689,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
