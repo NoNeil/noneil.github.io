@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[821.Shortest Distance to a Character]]></title>
+    <url>%2F2018%2F06%2F24%2F821-Shortest-Distance-to-a-Character%2F</url>
+    <content type="text"><![CDATA[LeetCode链接：821.Shortest Distance to a Character 题目给定一个字符串 S 和一个字符 C，返回一组整数，表示字符串中每个字符到字符 C 的最短距离。 样例 Input: S = “loveleetcode”, C = ‘e’Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] 注意： S 的长度在 [1, 10000] 之间. C 是一个单字符, 并且一定在 S 中出现. 所有的字符都是小写字符. 分析用一个数组index记录字符C在S中出现的位置。 index = [3, 5, 6, 11] 遍历i in [0, len-1]，求出i与index中任意一个值的『最小差值』. 遍历[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]，求i与[3, 5, 6, 11]中任意一个值的『最小差值』。两重遍历的话，时间复杂度为$O(n^2)$. 恰巧的是，数组index是有序的，所以只需要用两个角标[left, right]，来分别记录『恰好比i大』和『恰好比i小』的值的索引。时间复杂度为$O(n)$. 代码Python代码如下：123456789101112131415161718192021222324def shortestToChar(self, S, C): """ :type S: str :type C: str :rtype: List[int] """ # 字符C出现的index index = [idx for idx, c in enumerate(S) if c == C] # S中任意一个字符分别到左右两边最近的C的index # 遍历S的过程中，保证：index[left] &lt;= i &lt; index[right] left = right = 0 res = [] for i in range(len(S)): # print (i, left, right) res.append(min(abs(i - index[left]), abs(i - index[right]))) # 保证：index[right] &gt; i if i &gt;= index[right] and right +1 &lt; len(index): right += 1 # 保证：i &gt;= index[left] if left + 1 &lt; len(index) and i &gt;= index[left+1]: left += 1 return res 官方答案 对于每一个索引i，我们从左往右遍历一遍，记录上次C出现的位置prev，i-prev就是字符S[i]到左边最近的C的距离。 同样，再从右往左遍历一遍，prev-i就是字符S[i]到右边最近的C的距离。 取min(i-prev, prev-i)，就是我们想要的结果。 12345678910111213def shortestToChar(self, S, C): prev = float('-inf') ans = [] for i, x in enumerate(S): if x == C: prev = i ans.append(i - prev) prev = float('inf') for i in xrange(len(S) - 1, -1, -1): if S[i] == C: prev = i ans[i] = min(ans[i], prev - i) return ans]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[814.Binary Tree Pruning]]></title>
     <url>%2F2018%2F06%2F24%2F814-Binary-Tree-Pruning%2F</url>
     <content type="text"><![CDATA[LeetCode链接：814.Binary Tree Pruning 题目给定一个二叉树，节点的值要么是0、要么是1。要求把所有节点都为0的子树剪掉。 举例Example 1: Input: [1,null,0,0,1]Output: [1,null,0,null,1] Explanation:Only the red nodes satisfy the property “every subtree not containing a 1”.The diagram on the right represents the answer. Example 2: Input: [1,0,1,0,0,0,1]Output: [1,null,1,null,1] 分析根据题意，如果某个子树的『和』等于0，就可以将其剪掉（node.left=None或者node.right=Node）. 求子树的『和』，可以使用后序遍历。 除了记录子树的『和』之外，还需要记录子树的『节点个数』。只有同时满足『和』=0且『节点个数』&gt;0时，才将其剪掉。 因此，用两个值[sum, num]分别记录以当前节点为根节点的子树的『和』与『节点个数』。这两个值的更新如下：12sum = left_sum + right_sum + node.valnum = left_num + right_num + 1 代码Python代码如下：123456789101112131415161718192021222324252627def pruneTree(self, root): """ :type root: TreeNode :rtype: TreeNode """ def helper(node): if not node: return [0, 0] # 后序遍历，计算[和，节点个数] [left_sum, left_num] = helper(node.left) [right_sum, right_num] = helper(node.right) sum = left_sum + right_sum + node.val num = left_num + right_num + 1 # 判断并剪枝 # 如果左子树『节点个数』&gt; 0 且 『和』= 0 if left_num &gt; 0 and left_sum == 0: node.left = None # 如果又子树『节点个数』&gt; 0 且 『和』= 0 if right_num &gt; 0 and right_sum == 0: node.right = None # 返回：以当前节点为根节点的子树的『和』与『节点个数』 return [sum, num] helper(root) return root]]></content>

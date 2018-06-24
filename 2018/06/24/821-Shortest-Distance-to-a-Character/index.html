@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="LeetCode,Binary Tree," />
+  <meta name="keywords" content="LeetCode,字符串," />
 
 
 
@@ -123,21 +123,18 @@
 
 
 
-<meta name="description" content="二叉树的剪枝：给定一个二叉树，节点的值要么是0、要么是1。要求把所有节点都为0的子树剪掉。">
-<meta name="keywords" content="LeetCode,Binary Tree">
+<meta name="description" content="给定一个字符串 `S` 和一个字符 `C`，返回一组整数，表示字符串中每个字符到字符 `C` 的最短距离。解答：分别从左往右和从右往左遍历2次，用`prev`记录上次字符`C`出现的位置，取`min(i-prev, prev-i)`，就是我们想要的结果。">
+<meta name="keywords" content="LeetCode,字符串">
 <meta property="og:type" content="article">
-<meta property="og:title" content="814.Binary Tree Pruning">
-<meta property="og:url" content="http://yoursite.com/2018/06/24/814-Binary-Tree-Pruning/index.html">
+<meta property="og:title" content="821.Shortest Distance to a Character">
+<meta property="og:url" content="http://yoursite.com/2018/06/24/821-Shortest-Distance-to-a-Character/index.html">
 <meta property="og:site_name" content="Neil&#39;s Blog">
-<meta property="og:description" content="二叉树的剪枝：给定一个二叉树，节点的值要么是0、要么是1。要求把所有节点都为0的子树剪掉。">
+<meta property="og:description" content="给定一个字符串 `S` 和一个字符 `C`，返回一组整数，表示字符串中每个字符到字符 `C` 的最短距离。解答：分别从左往右和从右往左遍历2次，用`prev`记录上次字符`C`出现的位置，取`min(i-prev, prev-i)`，就是我们想要的结果。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/06/24/814-Binary-Tree-Pruning/1028_2.png">
-<meta property="og:image" content="http://yoursite.com/2018/06/24/814-Binary-Tree-Pruning/1028_1.png">
-<meta property="og:updated_time" content="2018-06-24T12:17:41.000Z">
+<meta property="og:updated_time" content="2018-06-24T13:18:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="814.Binary Tree Pruning">
-<meta name="twitter:description" content="二叉树的剪枝：给定一个二叉树，节点的值要么是0、要么是1。要求把所有节点都为0的子树剪掉。">
-<meta name="twitter:image" content="http://yoursite.com/2018/06/24/814-Binary-Tree-Pruning/1028_2.png">
+<meta name="twitter:title" content="821.Shortest Distance to a Character">
+<meta name="twitter:description" content="给定一个字符串 `S` 和一个字符 `C`，返回一组整数，表示字符串中每个字符到字符 `C` 的最短距离。解答：分别从左往右和从右往左遍历2次，用`prev`记录上次字符`C`出现的位置，取`min(i-prev, prev-i)`，就是我们想要的结果。">
 
 
 
@@ -167,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/24/814-Binary-Tree-Pruning/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/24/821-Shortest-Distance-to-a-Character/"/>
 
 
 
 
 
-  <title>814.Binary Tree Pruning | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>821.Shortest Distance to a Character | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -334,7 +331,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/814-Binary-Tree-Pruning/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/821-Shortest-Distance-to-a-Character/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Neil Xu">
@@ -351,7 +348,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">814.Binary Tree Pruning</h1>
+          <h1 class="post-title" itemprop="name headline">821.Shortest Distance to a Character</h1>
         
 
         <div class="post-meta">
@@ -363,7 +360,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T20:17:41+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T21:18:41+08:00">
                 2018-06-24
               </time>
             
@@ -404,9 +401,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/24/814-Binary-Tree-Pruning/#comments" itemprop="discussionUrl">
+                <a href="/2018/06/24/821-Shortest-Distance-to-a-Character/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/24/814-Binary-Tree-Pruning/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/06/24/821-Shortest-Distance-to-a-Character/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -421,7 +418,7 @@
 
           
               <div class="post-description">
-                  二叉树的剪枝：给定一个二叉树，节点的值要么是0、要么是1。要求把所有节点都为0的子树剪掉。
+                  给定一个字符串 `S` 和一个字符 `C`，返回一组整数，表示字符串中每个字符到字符 `C` 的最短距离。解答：分别从左往右和从右往左遍历2次，用`prev`记录上次字符`C`出现的位置，取`min(i-prev, prev-i)`，就是我们想要的结果。
               </div>
           
 
@@ -438,21 +435,32 @@
       
 
       
-        <p><a href="https://leetcode.com/problems/binary-tree-pruning/" target="_blank" rel="noopener">LeetCode链接：814.Binary Tree Pruning</a></p>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个二叉树，节点的值要么是0、要么是1。<br>要求把所有节点都为0的子树剪掉。</p>
-<h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1:"></a>Example 1:</h2><blockquote>
-<p>Input: [1,null,0,0,1]<br>Output: [1,null,0,null,1]</p>
-<p>Explanation:<br>Only the red nodes satisfy the property “every subtree not containing a 1”.<br>The diagram on the right represents the answer.<br><img src="1028_2.png" alt=""></p>
+        <p><a href="https://leetcode.com/problems/shortest-distance-to-a-character" target="_blank" rel="noopener">LeetCode链接：821.Shortest Distance to a Character</a></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个字符串 <code>S</code> 和一个字符 <code>C</code>，返回一组整数，表示字符串中每个字符到字符 <code>C</code> 的最短距离。</p>
+<h1 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h1><blockquote>
+<p>Input: S = “loveleetcode”, C = ‘e’<br>Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]</p>
 </blockquote>
-<h2 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2:"></a>Example 2:</h2><blockquote>
-<p>Input: [1,0,1,0,0,0,1]<br>Output: [1,null,1,null,1]<br><img src="1028_1.png" alt=""></p>
+<h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><ul>
+<li>S 的长度在 [1, 10000] 之间.</li>
+<li>C 是一个单字符, 并且一定在 <code>S</code> 中出现.</li>
+<li>所有的字符都是小写字符.</li>
+</ul>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>用一个数组<code>index</code>记录字符<code>C</code>在<code>S</code>中出现的位置。</p>
+<blockquote>
+<p>index = [3, 5, 6, 11]</p>
 </blockquote>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>根据题意，如果某个子树的『和』等于0，就可以将其剪掉（node.left=None或者node.right=Node）.</p>
-<p>求子树的『和』，可以使用<strong>后序遍历</strong>。</p>
-<p>除了记录子树的『和』之外，还需要记录子树的『节点个数』。只有同时满足『和』=0且『节点个数』&gt;0时，才将其剪掉。</p>
-<p>因此，用两个值<code>[sum, num]</code>分别记录以当前节点为根节点的子树的『和』与『节点个数』。<br>这两个值的更新如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sum = left_sum + right_sum + node.val</span><br><span class="line">num = left_num + right_num + <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Python代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pruneTree</span><span class="params">(self, root)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :type root: TreeNode</span></span><br><span class="line"><span class="string">    :rtype: TreeNode</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(node)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">            <span class="keyword">return</span> [<span class="number">0</span>, <span class="number">0</span>] </span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 后序遍历，计算[和，节点个数]</span></span><br><span class="line">        [left_sum, left_num] = helper(node.left)</span><br><span class="line">        [right_sum, right_num] = helper(node.right)</span><br><span class="line">        sum = left_sum + right_sum + node.val</span><br><span class="line">        num = left_num + right_num + <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 判断并剪枝</span></span><br><span class="line">        <span class="comment"># 如果左子树『节点个数』&gt; 0 且 『和』= 0</span></span><br><span class="line">        <span class="keyword">if</span> left_num &gt; <span class="number">0</span> <span class="keyword">and</span> left_sum == <span class="number">0</span>: </span><br><span class="line">            node.left = <span class="keyword">None</span></span><br><span class="line">        <span class="comment"># 如果又子树『节点个数』&gt; 0 且 『和』= 0</span></span><br><span class="line">        <span class="keyword">if</span> right_num &gt; <span class="number">0</span> <span class="keyword">and</span> right_sum == <span class="number">0</span>: </span><br><span class="line">            node.right = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 返回：以当前节点为根节点的子树的『和』与『节点个数』</span></span><br><span class="line">        <span class="keyword">return</span> [sum, num]</span><br><span class="line">    helper(root)</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure></p>
-
+<p>遍历<code>i in [0, len-1]</code>，求出<code>i</code>与<code>index</code>中任意一个值的『最小差值』.</p>
+<blockquote>
+<p>遍历<code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]</code>，求<code>i</code>与<code>[3, 5, 6, 11]</code>中任意一个值的『最小差值』。<br>两重遍历的话，时间复杂度为$O(n^2)$.</p>
+</blockquote>
+<p>恰巧的是，数组<code>index</code>是有序的，所以只需要用两个角标[left, right]，来分别记录『恰好比<code>i</code>大』和『恰好比<code>i</code>小』的值的索引。时间复杂度为$O(n)$.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>Python代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shortestToChar</span><span class="params">(self, S, C)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :type S: str</span></span><br><span class="line"><span class="string">    :type C: str</span></span><br><span class="line"><span class="string">    :rtype: List[int]</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># 字符C出现的index</span></span><br><span class="line">    index = [idx <span class="keyword">for</span> idx, c <span class="keyword">in</span> enumerate(S) <span class="keyword">if</span> c == C]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># S中任意一个字符分别到左右两边最近的C的index</span></span><br><span class="line">    <span class="comment"># 遍历S的过程中，保证：index[left] &lt;= i &lt; index[right]</span></span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(S)):  </span><br><span class="line">        <span class="comment"># print (i, left, right)</span></span><br><span class="line">        res.append(min(abs(i - index[left]), abs(i - index[right])))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 保证：index[right] &gt; i</span></span><br><span class="line">        <span class="keyword">if</span> i &gt;= index[right] <span class="keyword">and</span> right +<span class="number">1</span> &lt; len(index):</span><br><span class="line">            right += <span class="number">1</span></span><br><span class="line">        <span class="comment"># 保证：i &gt;= index[left]</span></span><br><span class="line">        <span class="keyword">if</span> left + <span class="number">1</span> &lt; len(index) <span class="keyword">and</span> i &gt;= index[left+<span class="number">1</span>]:</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p>
+<h1 id="官方答案"><a href="#官方答案" class="headerlink" title="官方答案"></a>官方答案</h1><ol>
+<li>对于每一个索引<code>i</code>，我们从左往右遍历一遍，记录上次<code>C</code>出现的位置<code>prev</code>，<code>i-prev</code>就是字符<code>S[i]</code>到左边最近的<code>C</code>的距离。</li>
+<li>同样，再从右往左遍历一遍，<code>prev-i</code>就是字符<code>S[i]</code>到右边最近的<code>C</code>的距离。</li>
+<li>取<code>min(i-prev, prev-i)</code>，就是我们想要的结果。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shortestToChar</span><span class="params">(self, S, C)</span>:</span></span><br><span class="line">    prev = float(<span class="string">'-inf'</span>)</span><br><span class="line">    ans = []</span><br><span class="line">    <span class="keyword">for</span> i, x <span class="keyword">in</span> enumerate(S):</span><br><span class="line">        <span class="keyword">if</span> x == C: prev = i</span><br><span class="line">        ans.append(i - prev)</span><br><span class="line"></span><br><span class="line">    prev = float(<span class="string">'inf'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(len(S) - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> S[i] == C: prev = i</span><br><span class="line">        ans[i] = min(ans[i], prev - i)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -471,7 +479,7 @@
           
             <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
-            <a href="/tags/Binary-Tree/" rel="tag"># Binary Tree</a>
+            <a href="/tags/字符串/" rel="tag"># 字符串</a>
           
         </div>
       
@@ -484,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/17/概述-梯度下降优化算法/" rel="next" title="概述:梯度下降优化算法">
-                <i class="fa fa-chevron-left"></i> 概述:梯度下降优化算法
+              <a href="/2018/06/24/814-Binary-Tree-Pruning/" rel="next" title="814.Binary Tree Pruning">
+                <i class="fa fa-chevron-left"></i> 814.Binary Tree Pruning
               </a>
             
           </div>
@@ -493,10 +501,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/24/821-Shortest-Distance-to-a-Character/" rel="prev" title="821.Shortest Distance to a Character">
-                821.Shortest Distance to a Character <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -654,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#举例"><span class="nav-number">2.</span> <span class="nav-text">举例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-1"><span class="nav-number">2.1.</span> <span class="nav-text">Example 1:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-2"><span class="nav-number">2.2.</span> <span class="nav-text">Example 2:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">2.3.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.4.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#样例"><span class="nav-number">2.</span> <span class="nav-text">样例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意："><span class="nav-number">3.</span> <span class="nav-text">注意：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">4.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">5.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#官方答案"><span class="nav-number">6.</span> <span class="nav-text">官方答案</span></a></li></ol></div>
             
 
           </div>
@@ -824,9 +828,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/06/24/814-Binary-Tree-Pruning/';
-          this.page.identifier = '2018/06/24/814-Binary-Tree-Pruning/';
-          this.page.title = '814.Binary Tree Pruning';
+          this.page.url = 'http://yoursite.com/2018/06/24/821-Shortest-Distance-to-a-Character/';
+          this.page.identifier = '2018/06/24/821-Shortest-Distance-to-a-Character/';
+          this.page.title = '821.Shortest Distance to a Character';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://neilxu.disqus.com/embed.js';
