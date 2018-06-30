@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CentOS 6.9 安装gnome，使用VNC访问远程桌面]]></title>
+    <url>%2F2018%2F06%2F30%2FCentOS-6-%E5%AE%89%E8%A3%85gnome%EF%BC%8C%E4%BD%BF%E7%94%A8VNC%E8%AE%BF%E9%97%AE%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%2F</url>
+    <content type="text"><![CDATA[要通过远程桌面访问最小安装的CentOS，需要先在服务端安装gnome和VNC Server，然后通过VNC Client登录远程桌面。 服务器端安装 gnome 图形化桌面 安装 gnome 1$ sudo yum groupinstall -y "X Window System" "Desktop" "Chinese Support" 设置开机启动『重启后生效』编辑 vim /etc/inittab 12将 id:3:initdefault:改为 id:5:initdefault: 安装 VNCServer 安装 tigerVNC 1$ sudo yum -y install vnc *vnc-server* 修改VNCServer主配置文件 1$ sudo vim /etc/sysconfig/vncservers 复制最后两行并去掉行首注释符，修改用户名12$ VNCSERVERS="1:user-name"$ VNCSERVERARGS[1]="-geometry 1366x768" 设置VNCServer远程连接密码 1$ vncpasswd 启动vncserver服务 1$ sudo service vncserver start 启动服务后，会在第3步中的用户目录下生成.vnc/xstartup文件，编辑该文件 12345$ vim /root/.vnc/xstartup``` 将最后一行改为```shellgnome &amp; 重启vncserver服务 1$ sudo service vncserver restart 开机启动『可选』 1$ chkconfig --level 345 vncserver on 备注：如果是在AWS、阿里云等云主机上的话，需要配置安全组。vncserver的默认端口号是5901。 客户端使用 VNC-Viewer 客户端连接到远程桌面，在VNC Server一栏输入：IP:1xxx.xxx.xxx.xxx:1 输入1.3步中设置的密码，即可登录。 附加，安装Chromium的步骤如果直接在Google官网下载Chrome，安装rpm包的话，会报一些依赖没安装的错误。 这里介绍更简单的使用yum安装Chromium的方法。 安装 NCSU ITECS 仓库 (64-bit only) 1$ sudo yum localinstall http://install.linux.ncsu.edu/pub/yum/itecs/public/chromium/rhel6/noarch/chromium-release-1.1-1.noarch.rpm 安装/启用 hughesjr Chromium EL 6 repository (32-bit and 64-bit)『只能安装旧版本』 12$ sudo cd /etc/yum.repos.d$ sudo wget http://people.centos.org/hughesjr/chromium/6/chromium-el6.repo 安装 Chromium Browser on CentOS 6 / RHEL 6 1$ sudo yum install chromium 总结：本文介绍了在 CentOS 6.9 上安装 gnome 的步骤，以及使用 VNC Client 登录远程桌面。最后附加了安装Chromium的步骤。 参考： https://blog.csdn.net/qq_34754363/article/details/72715341 https://www.if-not-true-then-false.com/2013/install-chromium-on-centos-red-hat-rhel/]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>CentOS</tag>
+        <tag>远程桌面</tag>
+        <tag>gnome</tag>
+        <tag>VNC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[821.Shortest Distance to a Character]]></title>
     <url>%2F2018%2F06%2F24%2F821-Shortest-Distance-to-a-Character%2F</url>
     <content type="text"><![CDATA[LeetCode链接：821.Shortest Distance to a Character 题目给定一个字符串 S 和一个字符 C，返回一组整数，表示字符串中每个字符到字符 C 的最短距离。 样例 Input: S = “loveleetcode”, C = ‘e’Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] 注意： S 的长度在 [1, 10000] 之间. C 是一个单字符, 并且一定在 S 中出现. 所有的字符都是小写字符. 分析用一个数组index记录字符C在S中出现的位置。 index = [3, 5, 6, 11] 遍历i in [0, len-1]，求出i与index中任意一个值的『最小差值』. 遍历[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]，求i与[3, 5, 6, 11]中任意一个值的『最小差值』。两重遍历的话，时间复杂度为$O(n^2)$. 恰巧的是，数组index是有序的，所以只需要用两个角标[left, right]，来分别记录『恰好比i大』和『恰好比i小』的值的索引。时间复杂度为$O(n)$. 代码Python代码如下：123456789101112131415161718192021222324def shortestToChar(self, S, C): """ :type S: str :type C: str :rtype: List[int] """ # 字符C出现的index index = [idx for idx, c in enumerate(S) if c == C] # S中任意一个字符分别到左右两边最近的C的index # 遍历S的过程中，保证：index[left] &lt;= i &lt; index[right] left = right = 0 res = [] for i in range(len(S)): # print (i, left, right) res.append(min(abs(i - index[left]), abs(i - index[right]))) # 保证：index[right] &gt; i if i &gt;= index[right] and right +1 &lt; len(index): right += 1 # 保证：i &gt;= index[left] if left + 1 &lt; len(index) and i &gt;= index[left+1]: left += 1 return res 官方答案 对于每一个索引i，我们从左往右遍历一遍，记录上次C出现的位置prev，i-prev就是字符S[i]到左边最近的C的距离。 同样，再从右往左遍历一遍，prev-i就是字符S[i]到右边最近的C的距离。 取min(i-prev, prev-i)，就是我们想要的结果。 12345678910111213def shortestToChar(self, S, C): prev = float('-inf') ans = [] for i, x in enumerate(S): if x == C: prev = i ans.append(i - prev) prev = float('inf') for i in xrange(len(S) - 1, -1, -1): if S[i] == C: prev = i ans[i] = min(ans[i], prev - i) return ans]]></content>
@@ -230,8 +244,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>git</tag>
         <tag>Hexo</tag>
+        <tag>git</tag>
         <tag>github</tag>
       </tags>
   </entry>
