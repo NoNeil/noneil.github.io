@@ -86,6 +86,20 @@ xxx.xxx.xxx.xxx:1
 
 输入1.3步中设置的密码，即可登录。
 
+# gnome图形界面的开启与关闭
+
+## 开启
+```shell
+$ sudo init 5
+# 或
+$ sudo startx
+```
+
+## 关闭
+```shell
+$ sudo init 3   // 关闭图形界面（XServer服务也会关闭）
+```
+
 # 附加，安装Chromium的步骤
 如果直接在`Google`官网下载[Chrome](https://www.google.com/chrome/)，安装`rpm`包的话，会报一些依赖没安装的错误。
 
