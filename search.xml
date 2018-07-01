@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[856. Score of Parentheses]]></title>
+    <url>%2F2018%2F07%2F01%2F856-Score-of-Parentheses%2F</url>
+    <content type="text"><![CDATA[LeetCode: 856. Score of Parentheses 题目：给定一个由『平衡圆括号』组成的数组，根据如下规则计算字符串的分数： () 的分数为: 1 AB 的分数为: A + B, A和B为数字(where A and B are balanced parentheses strings). (A) 的分数为: 2 * A, A是数字(where A is a balanced parentheses string). 举例 Example 1: Input: “()”Output: 1 Example 2: Input: “(())”Output: 2 Example 3: Input: “()()”Output: 2 Example 4: Input: “(()(()))”Output: 6 分析使用『栈』进行计算。因为需要计算的数字都是正数，可以用0来代替左括号(。 当遇到左括号(时（也就是0），压栈. 当遇到右括号)是，开始计算：2.1 如果栈顶是左括号(，则满足()，那么弹出栈顶元素，进栈1.2.2 如果栈顶是正数，则满足(A)，那么弹出2个元素，进栈2*A.计算完后，判断栈顶是否存在AB，如果存在，那么弹出2个元素，进栈A+B. 代码python代码如下：12345678910111213141516171819202122232425def scoreOfParentheses(self, S): """ :type S: str :rtype: int """ stack = [] for s in S: if s == '(': # 当遇到左括号时，往栈内压入一个0，作为标记 stack.append(0) elif s == ')': # 当遇到右括号时，进行运算 if stack[-1] == 0: # () 如果栈顶是左括号 stack[-1] = 1 # () -&gt; 1 else: # (A) 如果栈顶数字 stack[-2] = stack[-1] * 2 # (A) -&gt; A * 2 stack = stack[:-1] # 上面经过运算之后，栈顶新产生了一个数字 # 如果stack[-2]也是数字，也就是遇到了『AB』，需要将其消掉 if len(stack) &gt;= 2 and stack[-2] &gt; 0: # AB stack[-2] = stack[-2] + stack[-1] # AB -&gt; A + B stack = stack[ :-1] else: # (B 如果stack[-2]不是数字，那么必是左括号，不做任何处理 pass # print (stack) return stack[0]]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[859. Buddy Strings]]></title>
+    <url>%2F2018%2F07%2F01%2F859-Buddy-Strings%2F</url>
+    <content type="text"><![CDATA[LeetCode: 859. Buddy Strings 题目给定2个数组A和B，如果我们能通过交换（必须交换一次）任意两个不同位置的字母使A=B，就返回true；否则返回false。 举例 Example 1: Input: A = “ab”, B = “ba”Output: true Example 2: Input: A = “ab”, B = “ab”Output: false Example 3: Input: A = “aa”, B = “aa”Output: true Example 4: Input: A = “aaaaaaabc”, B = “aaaaaaacb”Output: true Example 5: Input: A = “”, B = “aa”Output: false 分析先找出两个数组存在字母不同的各个索引位置。对于不同字母的个数num： num == 2，判断交换之后是否一样； num == 1 or num &gt; 2，则返回false； num == 0，也就是A与B两个字符串已经是相等的。那么就要判断A或B中是否存在相同的字母。 代码123456789101112131415161718192021def buddyStrings(self, A, B): """ :type A: str :type B: str :rtype: bool """ if len(A) != len(B): return False index = [idx for idx, (a, b) in enumerate(zip(A, B)) if a != b] #print (index) if len(index) == 0: count = [0] * 26 for a in A: count[ord(a) - ord('a')] += 1 if count[ord(a) - ord('a')] == 2: return True return False if len(index) == 2: return A[index[0]] == B[index[1]] and A[index[1]] == B[index[0]] if len(index) == 1 or len(index) &gt; 2: return False]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[852.Peak Index in a Mountain Array]]></title>
     <url>%2F2018%2F07%2F01%2F852-Peak-Index-in-a-Mountain-Array%2F</url>
-    <content type="text"><![CDATA[题目数组A是一个『山峰』，其必满足这两个属性： A.length &gt;= 3 存在一个i，0 &lt; i &lt; A.length - 1，满足：A[0] &lt; A[1] &lt; ... A[i-1] &lt; A[i] &gt; A[i+1] &gt; ... &gt; A[A.length - 1] 给定一个是『山峰』的数组，返回『顶点』i。 样例 Example 1: Input: [0,1,0]Output: 1 Example 2: Input: [0,2,1,0]Output: 1 分析首先，可以使用『二分查找』。其次，『山峰』有一个很重要的属性：A[i-1] &lt; A[i] &gt; A[i+1]，都是大于或者小于，没有等于。 对于A[mid]，比较A[mid]与A[mid+1]的大小， 如果A[mid] &lt; A[mid+1]，那么是/这种形状的斜坡，则low = mid+1 如果A[mid] &gt; A[mid+1]，那么是\这种形状的斜坡，则high = mid 代码C++ 代码如下：12345678910111213141516int peakIndexInMountainArray(vector&lt;int&gt;&amp; A) &#123; int low = 0, high = A.size() - 1; while (low &lt; high) &#123; int mid = (low + high) / 2; if (A[mid] &lt; A[mid+1]) // 因为low &lt; high，所以mid+1 &lt;= high &#123; low = mid + 1; &#125; else // A[mid] &gt;= A[mid+1] &#123; high = mid; &#125; &#125; return high;&#125;]]></content>
+    <content type="text"><![CDATA[LeetCode: 852.Peak Index in a Mountain Array 题目数组A是一个『山峰』，其必满足这两个属性： A.length &gt;= 3 存在一个i，0 &lt; i &lt; A.length - 1，满足：A[0] &lt; A[1] &lt; ... A[i-1] &lt; A[i] &gt; A[i+1] &gt; ... &gt; A[A.length - 1] 给定一个是『山峰』的数组，返回『顶点』i。 样例 Example 1: Input: [0,1,0]Output: 1 Example 2: Input: [0,2,1,0]Output: 1 分析首先，可以使用『二分查找』。其次，『山峰』有一个很重要的属性：A[i-1] &lt; A[i] &gt; A[i+1]，都是大于或者小于，没有等于。 对于A[mid]，比较A[mid]与A[mid+1]的大小， 如果A[mid] &lt; A[mid+1]，那么是/这种形状的斜坡，则low = mid+1 如果A[mid] &gt; A[mid+1]，那么是\这种形状的斜坡，则high = mid 代码C++ 代码如下：12345678910111213141516int peakIndexInMountainArray(vector&lt;int&gt;&amp; A) &#123; int low = 0, high = A.size() - 1; while (low &lt; high) &#123; int mid = (low + high) / 2; if (A[mid] &lt; A[mid+1]) // 因为low &lt; high，所以mid+1 &lt;= high &#123; low = mid + 1; &#125; else // A[mid] &gt;= A[mid+1] &#123; high = mid; &#125; &#125; return high;&#125;]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
@@ -70,8 +93,8 @@
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
         <tag>李宏毅</tag>
+        <tag>Machine Learning</tag>
         <tag>Ensemble</tag>
         <tag>AdaBoost</tag>
         <tag>Random Forest</tag>
@@ -85,8 +108,8 @@
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
         <tag>李宏毅</tag>
+        <tag>Machine Learning</tag>
         <tag>CNN</tag>
       </tags>
   </entry>
@@ -98,8 +121,8 @@
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
         <tag>李宏毅</tag>
+        <tag>Machine Learning</tag>
         <tag>DNN</tag>
       </tags>
   </entry>
@@ -124,8 +147,8 @@
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
         <tag>李宏毅</tag>
+        <tag>Machine Learning</tag>
         <tag>BP</tag>
       </tags>
   </entry>
@@ -137,8 +160,8 @@
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
         <tag>李宏毅</tag>
+        <tag>Machine Learning</tag>
         <tag>Deep Learning</tag>
       </tags>
   </entry>
@@ -202,8 +225,8 @@
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
         <tag>李宏毅</tag>
+        <tag>Machine Learning</tag>
         <tag>梯度下降</tag>
       </tags>
   </entry>
@@ -215,8 +238,8 @@
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
         <tag>李宏毅</tag>
+        <tag>Machine Learning</tag>
         <tag>Bias</tag>
         <tag>Variance</tag>
       </tags>
@@ -229,8 +252,8 @@
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
         <tag>李宏毅</tag>
+        <tag>Machine Learning</tag>
         <tag>Regression</tag>
         <tag>调参</tag>
       </tags>
@@ -243,8 +266,8 @@
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
         <tag>李宏毅</tag>
+        <tag>Machine Learning</tag>
         <tag>Regression</tag>
       </tags>
   </entry>
