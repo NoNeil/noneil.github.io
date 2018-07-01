@@ -9,6 +9,7 @@ date: 2018-07-01 17:05:26
 updated: 2018-07-01 17:05:26
 ---
 
+[LeetCode: 852.Peak Index in a Mountain Array](https://leetcode.com/problems/peak-index-in-a-mountain-array)
 
 # 题目
 数组`A`是一个『山峰』，其必满足这两个属性：
