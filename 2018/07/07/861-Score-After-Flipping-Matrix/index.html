@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,npm," />
+  <meta name="keywords" content="LeetCode,贪心," />
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="安装hexo，新建博客，安装server插件，启动博客 12345$ npm install hexo-cli -g$ hexo init blog$ cd blog$ npm install$ hexo server  草稿 123$ hexo new draft &amp;lt;title&amp;gt;$ hexo server --draft$ hexo publish &amp;lt;title&amp;gt;  插">
-<meta name="keywords" content="Hexo,npm">
+<meta name="description" content="贪心法求解矩阵的行列翻转问题。">
+<meta name="keywords" content="LeetCode,贪心">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo 命令手册">
-<meta property="og:url" content="http://yoursite.com/2018/03/16/hexo命令手册/index.html">
+<meta property="og:title" content="861. Score After Flipping Matrix">
+<meta property="og:url" content="http://yoursite.com/2018/07/07/861-Score-After-Flipping-Matrix/index.html">
 <meta property="og:site_name" content="Neil&#39;s Blog">
-<meta property="og:description" content="安装hexo，新建博客，安装server插件，启动博客 12345$ npm install hexo-cli -g$ hexo init blog$ cd blog$ npm install$ hexo server  草稿 123$ hexo new draft &amp;lt;title&amp;gt;$ hexo server --draft$ hexo publish &amp;lt;title&amp;gt;  插">
+<meta property="og:description" content="贪心法求解矩阵的行列翻转问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T15:13:08.948Z">
+<meta property="og:updated_time" content="2018-07-07T09:14:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo 命令手册">
-<meta name="twitter:description" content="安装hexo，新建博客，安装server插件，启动博客 12345$ npm install hexo-cli -g$ hexo init blog$ cd blog$ npm install$ hexo server  草稿 123$ hexo new draft &amp;lt;title&amp;gt;$ hexo server --draft$ hexo publish &amp;lt;title&amp;gt;  插">
+<meta name="twitter:title" content="861. Score After Flipping Matrix">
+<meta name="twitter:description" content="贪心法求解矩阵的行列翻转问题。">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/16/hexo命令手册/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/07/861-Score-After-Flipping-Matrix/"/>
 
 
 
 
 
-  <title>hexo 命令手册 | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>861. Score After Flipping Matrix | Neil's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -351,7 +351,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/16/hexo命令手册/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/861-Score-After-Flipping-Matrix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Neil Xu">
@@ -368,7 +368,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo 命令手册</h1>
+          <h1 class="post-title" itemprop="name headline">861. Score After Flipping Matrix</h1>
         
 
         <div class="post-meta">
@@ -380,8 +380,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T23:38:33+08:00">
-                2018-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-07T17:14:34+08:00">
+                2018-07-07
               </time>
             
 
@@ -403,8 +403,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -421,9 +421,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/16/hexo命令手册/#comments" itemprop="discussionUrl">
+                <a href="/2018/07/07/861-Score-After-Flipping-Matrix/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/16/hexo命令手册/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/07/07/861-Score-After-Flipping-Matrix/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -436,6 +436,10 @@
 
           
 
+          
+              <div class="post-description">
+                  贪心法求解矩阵的行列翻转问题。
+              </div>
           
 
         </div>
@@ -451,16 +455,34 @@
       
 
       
-        <ol>
-<li><p>安装hexo，新建博客，安装server插件，启动博客</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ cd blog</span><br><span class="line">$ npm install</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>草稿</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new draft &lt;title&gt;</span><br><span class="line">$ hexo server --draft</span><br><span class="line">$ hexo publish &lt;title&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>插件安装与卸载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install &lt;plubin name&gt;</span><br><span class="line">$ npm uninstall &lt;plugin name&gt;</span><br></pre></td></tr></table></figure></li>
+        <p><a href="https://leetcode.com/problems/score-after-flipping-matrix" target="_blank" rel="noopener">LeetCode链接：861. Score After Flipping Matrix</a></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个二维数组<code>A</code>，数组中的数值是<code>0</code>或<code>1</code>。</p>
+<p>你可以对每一行或每一列进行翻转：该行（或该列）的所有<code>0</code>变<code>1</code>或所有<code>1</code>变成<code>0</code>。</p>
+<p>矩阵的每一行表示一个二进制的数值，矩阵的得分为所有行的值的总和。</p>
+<p>求经过若干次翻转之后，矩阵得分的最大值。</p>
+<h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><blockquote>
+<p>Input: <code>[[0,0,1,1],[1,0,1,0],[1,1,0,0]]</code><br>Output: 39<br>Explanation:<br>翻转的最终结果为：<code>[[1,1,1,1],[1,0,0,1],[1,1,1,1]]</code>.<br><code>0b1111 + 0b1001 + 0b1111 = 15 + 9 + 15 = 39</code></p>
+</blockquote>
+<h1 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h1><h2 id="暴力法"><a href="#暴力法" class="headerlink" title="暴力法"></a>暴力法</h2><p>分别遍历每一行、每一列，尝试进行翻转，如果翻转后的<code>得分</code>比翻转前的高，就执行翻转。</p>
+<p>直到<code>得分</code>不再增加为止。</p>
+<p>C++代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">matrixScore</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> row = A.size();</span><br><span class="line">    <span class="keyword">if</span> (row == <span class="number">0</span>)   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> col = A[<span class="number">0</span>].size();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> result = score(A, row, col);        </span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="comment">// cout &lt;&lt; result &lt;&lt; endl;</span></span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> row_op = <span class="number">0</span>; row_op &lt; row; row_op++)&#123;</span><br><span class="line">            change(A, row, col, row_op, <span class="number">-1</span>, result, flag);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> col_op = <span class="number">0</span>; col_op &lt; col; col_op++)&#123;</span><br><span class="line">            change(A, row, col, <span class="number">-1</span>, col_op, result, flag);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!flag)&#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">score</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; A, <span class="keyword">int</span> row, <span class="keyword">int</span> col)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)&#123;</span><br><span class="line">            total += A[i][j] * <span class="built_in">pow</span>(<span class="number">2</span>, col - <span class="number">1</span> - j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; A, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span> row_op, <span class="keyword">int</span> col_op, <span class="keyword">int</span>&amp; old_score, <span class="keyword">bool</span>&amp; flag)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (row_op &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)&#123;</span><br><span class="line">            A[row_op][j] = <span class="number">1</span> - A[row_op][j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> new_score = score(A, row, col);</span><br><span class="line">        <span class="keyword">if</span> (old_score &gt;= new_score)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)&#123;</span><br><span class="line">                A[row_op][j] = <span class="number">1</span> - A[row_op][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">            old_score = new_score;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">            A[i][col_op] = <span class="number">1</span> - A[i][col_op];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> new_score = score(A, row, col);</span><br><span class="line">        <span class="keyword">if</span> (old_score &gt;= new_score)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">                A[i][col_op] = <span class="number">1</span> - A[i][col_op];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">            old_score = new_score;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="贪心法"><a href="#贪心法" class="headerlink" title="贪心法"></a>贪心法</h2><p>由于二进制数的特点：$2^n&gt;​2^{n−1}+2^{n−2}​+…+2^{0}​$​​。<br>也就是：左边的一个<code>1</code>比右边的所有<code>1</code>都更重要。</p>
+<p>贪心的步骤如下：</p>
+<ol>
+<li>第一步，先将第一列的所有<code>0</code>都变成<code>1</code>。</li>
+<li>然后，对于剩下的列，如果该列中<code>1</code>的个数小于一半，就对这一列进行翻转。</li>
 </ol>
+<p>第<code>1</code>步详细解释：<br>对于<code>A[i][j]</code>，如果<code>A[i][0]=1</code>（第一列），则不变；如果<code>A[i][0]=0</code>，则进行翻转。</p>
+<blockquote>
+<p><code>A[i][0]=1</code> 时：<br>如果：<code>A[i][j]=1</code>，则：<code>A[i][j]=1</code><br>如果：<code>A[i][j]=0</code>，则：<code>A[i][j]=0</code><br><code>A[i][0]=0</code> 时：<br>如果：<code>A[i][j]=1</code>，则：<code>A[i][j]=0</code><br>如果：<code>A[i][j]=0</code>，则：<code>A[i][j]=1</code></p>
+</blockquote>
+<p>上述操作可以用一行代码表示：<code>A[i][j] = 1 - A[i][j] ^ A[i][0]</code></p>
+<p>第<code>2</code>步：<br>我们要统计剩下的列中<code>1</code>的个数，循环剩下的所有列，对于某一列：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; row; r++)&#123;</span><br><span class="line">    one += <span class="number">1</span> + A[r][c] ^ A[r][<span class="number">0</span>];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么翻转后<code>one = max(one, row - one)</code>. 其中<code>row</code>表示矩阵的列数。<br>这个<code>max</code>函数，使得统计<code>1</code>的个数与统计<code>0</code>的个数是一样的，所以在统计<code>1</code>的个数的时候，可以简化为:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; row; r++)&#123;</span><br><span class="line">    one += A[r][c] ^ A[r][<span class="number">0</span>];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述分析对第一列也适用。</p>
+<p>矩阵总分的计算：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">score += one * <span class="built_in">pow</span>(<span class="number">2</span>, col - <span class="number">1</span> - c);</span><br><span class="line"><span class="comment">// score += one *  1 &lt;&lt; (col - 1 - c);</span></span><br></pre></td></tr></table></figure></p>
+<p>样例分析：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始</span></span><br><span class="line"><span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span></span><br><span class="line"><span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line"><span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span></span><br><span class="line"><span class="comment">// 1.先将第一列为0的进行翻转</span></span><br><span class="line"><span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line"><span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line"><span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line"><span class="comment">// 2.对于第3、4列，1的个数比0的个数少，进行翻转</span></span><br><span class="line"><span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span></span><br><span class="line"><span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line"><span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span></span><br><span class="line"><span class="comment">// 结果15+9+15=39</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">matrixScore</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> row = A.size();</span><br><span class="line">    <span class="keyword">if</span> (row == <span class="number">0</span>)   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> col = A[<span class="number">0</span>].size();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> score = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; col; c++)&#123;</span><br><span class="line">        <span class="comment">// 对于某一列，初始有多少个1</span></span><br><span class="line">        <span class="keyword">int</span> one = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; row; r++)&#123;</span><br><span class="line">            <span class="comment">// 其实这里是在统计有多少个0，加上下面的max函数之后，就变成了统计有多少个1了</span></span><br><span class="line">            one += A[r][c] ^ A[r][<span class="number">0</span>];  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果这一列中1的个数少于一半，那么只翻转这一列，翻转完之后，1的个数就多于一半了</span></span><br><span class="line">        one = max(one, row - one);</span><br><span class="line">        score += one * <span class="built_in">pow</span>(<span class="number">2</span>, col - <span class="number">1</span> - c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> score;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -478,9 +500,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
-            <a href="/tags/npm/" rel="tag"># npm</a>
+            <a href="/tags/贪心/" rel="tag"># 贪心</a>
           
         </div>
       
@@ -493,8 +515,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/16/797-All-Paths-From-Source-to-Target/" rel="next" title="797.All Paths From Source to Target">
-                <i class="fa fa-chevron-left"></i> 797.All Paths From Source to Target
+              <a href="/2018/07/01/CentOS-6-8-Java-7-升级到-Java-8/" rel="next" title="CentOS 6.8 从 Java 7 升级到 Java 8">
+                <i class="fa fa-chevron-left"></i> CentOS 6.8 从 Java 7 升级到 Java 8
               </a>
             
           </div>
@@ -502,10 +524,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/18/Titanic-Data-Science-Solution-翻译/" rel="prev" title="Titanic Data Science Solution(翻译)">
-                Titanic Data Science Solution(翻译) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -567,8 +585,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -644,6 +671,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#举例"><span class="nav-number">2.</span> <span class="nav-text">举例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解答"><span class="nav-number">3.</span> <span class="nav-text">解答</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力法"><span class="nav-number">3.1.</span> <span class="nav-text">暴力法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心法"><span class="nav-number">3.2.</span> <span class="nav-text">贪心法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -808,9 +851,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/03/16/hexo命令手册/';
-          this.page.identifier = '2018/03/16/hexo命令手册/';
-          this.page.title = 'hexo 命令手册';
+          this.page.url = 'http://yoursite.com/2018/07/07/861-Score-After-Flipping-Matrix/';
+          this.page.identifier = '2018/07/07/861-Score-After-Flipping-Matrix/';
+          this.page.title = '861. Score After Flipping Matrix';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://neilxu.disqus.com/embed.js';
