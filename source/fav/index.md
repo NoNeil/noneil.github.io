@@ -32,3 +32,6 @@ comments: false
 
 
 # 算法
+
+
+[Bash 快捷键](https://harttle.land/2015/11/09/bash-shortcuts.html#header-6)
